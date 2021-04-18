@@ -1,13 +1,16 @@
 package com.example.moviecatalogue.ui.home.movie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.databinding.FragmentMovieBinding
-import com.example.moviecatalogue.ui.home.CatalogueAdapter
+import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
+import com.example.moviecatalogue.ui.home.HomeAdapter
 import com.example.moviecatalogue.utils.DataDummy
 
 class MovieFragment : Fragment() {
@@ -22,12 +25,20 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             val movies = DataDummy.generateDummyMovies()
-            val catalogueAdapter = CatalogueAdapter()
-            catalogueAdapter.setCatalogues(movies)
+            val movieAdapter = HomeAdapter()
+            movieAdapter.setCatalogues(movies)
+            movieAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: CatalogueEntity) {
+                    Intent(activity, DetailMovieActivity::class.java).also {
+                        it.putExtra(DetailMovieActivity.EXTRA_MOVIE, data.id)
+                        startActivity(it)
+                    }
+                }
+            })
             with(fragmentMovieBinding.rvMovie) {
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)
-                adapter = catalogueAdapter
+                adapter = movieAdapter
             }
         }
     }

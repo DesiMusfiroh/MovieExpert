@@ -1,13 +1,18 @@
 package com.example.moviecatalogue.ui.home.tvshow
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.databinding.FragmentTvShowBinding
-import com.example.moviecatalogue.ui.home.CatalogueAdapter
+import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
+import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
+import com.example.moviecatalogue.ui.home.HomeAdapter
 import com.example.moviecatalogue.utils.DataDummy
 
 class TvShowFragment : Fragment() {
@@ -22,12 +27,20 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             val tvShows = DataDummy.generateDummyTvShows()
-            val catalogueAdapter = CatalogueAdapter()
-            catalogueAdapter.setCatalogues(tvShows)
+            val tvShowAdapter = HomeAdapter()
+            tvShowAdapter.setCatalogues(tvShows)
+            tvShowAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: CatalogueEntity) {
+                    Intent(activity, DetailTvShowActivity::class.java).also {
+                        it.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, data.id)
+                        startActivity(it)
+                    }
+                }
+            })
             with(fragmentTvShowBinding.rvTvshow) {
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)
-                adapter = catalogueAdapter
+                adapter = tvShowAdapter
             }
         }
     }
