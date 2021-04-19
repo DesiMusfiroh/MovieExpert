@@ -16,4 +16,7 @@
     <string name="back">Back</string>
     <string name="poster">Poster</string>
     <string name="logo">Logo</string>
+    <string name="send">Send</string>
+    <string name="url_movie">https://www.themoviedb.org/movie/%1$d</string>
+    <string name="url_tv">https://www.themoviedb.org/tv/%1$d</string>
 </resources>

@@ -18,6 +18,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         const val EXTRA_MOVIE = "extra_movie"
     }
     private lateinit var binding: ActivityDetailBinding
+    private var movieId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +26,13 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.btnBack.setOnClickListener(this)
+        binding.btnShare.setOnClickListener(this)
 
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailMovieViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
-            val movieId = extras.getInt(EXTRA_MOVIE)
+            movieId = extras.getInt(EXTRA_MOVIE)
             viewModel.setSelectedMovie(movieId)
             populateMovie(viewModel.getMovie())
         }
@@ -63,6 +65,13 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_back -> { startActivity(Intent(this, HomeActivity::class.java)) }
+            R.id.btn_share -> {
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.type="text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT,  getString(R.string.url_movie, movieId))
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.send)))
+            }
         }
     }
 }

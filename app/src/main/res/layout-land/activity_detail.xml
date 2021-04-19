@@ -39,7 +39,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:layout_width="16dp"
+        android:layout_width="20dp"
         android:layout_height="match_parent"
         android:background="@drawable/bg_detail_land"
         app:layout_constraintBottom_toBottomOf="@+id/cl_backdrop"
@@ -65,7 +65,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -221,6 +223,7 @@
                 android:textSize="12sp" />
 
             <Button
+                android:id="@+id/btn_share"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

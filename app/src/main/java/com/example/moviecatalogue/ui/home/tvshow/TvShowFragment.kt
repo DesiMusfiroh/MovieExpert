@@ -39,7 +39,7 @@ class TvShowFragment : Fragment() {
                 }
             })
             with(fragmentTvShowBinding.rvTvshow) {
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 3)
                 setHasFixedSize(true)
                 adapter = tvShowAdapter
             }

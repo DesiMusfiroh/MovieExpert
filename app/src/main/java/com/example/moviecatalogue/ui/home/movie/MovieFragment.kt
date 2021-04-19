@@ -39,7 +39,7 @@ class MovieFragment : Fragment() {
                 }
             })
             with(fragmentMovieBinding.rvMovie) {
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 3)
                 setHasFixedSize(true)
                 adapter = movieAdapter
             }
