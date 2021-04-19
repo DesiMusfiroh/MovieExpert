@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.databinding.FragmentMovieBinding
@@ -24,9 +25,12 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val movies = DataDummy.generateDummyMovies()
+            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MovieViewModel::class.java]
+            val movies = viewModel.getMovies()
+
             val movieAdapter = HomeAdapter()
             movieAdapter.setCatalogues(movies)
+
             movieAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: CatalogueEntity) {
                     Intent(activity, DetailMovieActivity::class.java).also {

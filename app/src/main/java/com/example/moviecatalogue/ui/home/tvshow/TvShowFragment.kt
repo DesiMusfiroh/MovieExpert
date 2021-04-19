@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviecatalogue.data.CatalogueEntity
@@ -13,6 +14,7 @@ import com.example.moviecatalogue.databinding.FragmentTvShowBinding
 import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
 import com.example.moviecatalogue.ui.home.HomeAdapter
+import com.example.moviecatalogue.ui.home.movie.MovieViewModel
 import com.example.moviecatalogue.utils.DataDummy
 
 class TvShowFragment : Fragment() {
@@ -26,9 +28,12 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val tvShows = DataDummy.generateDummyTvShows()
+            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvShowViewModel::class.java]
+            val tvShows = viewModel.getTvShow()
+
             val tvShowAdapter = HomeAdapter()
             tvShowAdapter.setCatalogues(tvShows)
+
             tvShowAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: CatalogueEntity) {
                     Intent(activity, DetailTvShowActivity::class.java).also {

@@ -2,6 +2,7 @@ package com.example.moviecatalogue.ui.detail.tvshow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -9,6 +10,7 @@ import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.databinding.ActivityDetailTvShowBinding
 import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
+import com.example.moviecatalogue.ui.detail.movie.DetailMovieViewModel
 import com.example.moviecatalogue.utils.DataDummy
 
 class DetailTvShowActivity : AppCompatActivity() {
@@ -23,12 +25,13 @@ class DetailTvShowActivity : AppCompatActivity() {
         binding = ActivityDetailTvShowBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailTvShowViewModel::class.java]
+
         val extras = intent.extras
         if (extras != null) {
             val tvShowId = extras.getInt(EXTRA_TV_SHOW)
-            for (tvShow in DataDummy.generateDummyTvShows()) {
-                if (tvShow.id == tvShowId) populateTvShow(tvShow)
-            }
+            viewModel.setSelectedTvShow(tvShowId)
+            populateTvShow(viewModel.getTvShow())
         }
     }
 
