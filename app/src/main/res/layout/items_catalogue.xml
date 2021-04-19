@@ -51,7 +51,8 @@
                 android:text="@string/rating"
                 android:textSize="10sp"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="SmallSp" />
         </TableRow>
 
     </androidx.cardview.widget.CardView>
@@ -76,6 +77,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/rocknroll_one"
         android:textSize="10sp"
-        tools:text="@string/date" />
+        tools:text="@string/date"
+        tools:ignore="SmallSp" />
 
 </LinearLayout>
