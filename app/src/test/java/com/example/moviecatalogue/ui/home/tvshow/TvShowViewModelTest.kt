@@ -1,7 +1,6 @@
 package com.example.moviecatalogue.ui.home.tvshow
 
 import org.junit.Test
-
 import org.junit.Assert.*
 import org.junit.Before
 
