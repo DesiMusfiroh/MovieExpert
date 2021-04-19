@@ -47,6 +47,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.CatalogueViewHolder>() {
             with(binding) {
                 tvItemName.text = catalogue.name
                 tvItemDate.text = catalogue.date
+                tvItemRating.text = catalogue.rating.toString()
                 Glide.with(itemView.context)
                     .load(catalogue.poster)
                     .apply(

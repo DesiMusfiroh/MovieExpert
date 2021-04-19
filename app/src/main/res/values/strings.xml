@@ -12,4 +12,8 @@
     <string name="rating">Rating</string>
     <string name="dots">:  </string>
     <string name="share">Share</string>
+    <string name="backdrop">Backdrop</string>
+    <string name="back">Back</string>
+    <string name="poster">Poster</string>
+    <string name="logo">Logo</string>
 </resources>
