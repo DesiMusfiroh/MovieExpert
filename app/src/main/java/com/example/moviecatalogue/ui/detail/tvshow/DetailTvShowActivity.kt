@@ -43,7 +43,7 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvName.text = tvShow.name
         binding.tvDesc.text = tvShow.desc
         binding.tvDate.text = tvShow.date
-        binding.tvRating.text = StringBuilder("${tvShow.rating} /10")
+        binding.tvRating.text = StringBuilder("${tvShow.rating}/10")
         binding.tvPopularity.text = tvShow.popularity.toString()
 
         Glide.with(this)
