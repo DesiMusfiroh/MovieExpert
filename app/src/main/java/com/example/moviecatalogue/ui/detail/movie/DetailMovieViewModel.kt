@@ -3,7 +3,6 @@ package com.example.moviecatalogue.ui.detail.movie
 import androidx.lifecycle.ViewModel
 import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.utils.DataDummy
-import kotlin.properties.Delegates
 
 class DetailMovieViewModel : ViewModel() {
     private var movieId: Int = 0

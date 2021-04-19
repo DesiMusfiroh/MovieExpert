@@ -12,7 +12,6 @@ import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.databinding.FragmentMovieBinding
 import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.ui.home.HomeAdapter
-import com.example.moviecatalogue.utils.DataDummy
 
 class MovieFragment : Fragment() {
     private lateinit var fragmentMovieBinding: FragmentMovieBinding

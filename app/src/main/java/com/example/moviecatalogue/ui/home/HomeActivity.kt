@@ -18,5 +18,6 @@ class HomeActivity : AppCompatActivity() {
         activityHomeBinding.tabs.setupWithViewPager(activityHomeBinding.viewPager)
 
         supportActionBar?.elevation = 0f
+
     }
 }

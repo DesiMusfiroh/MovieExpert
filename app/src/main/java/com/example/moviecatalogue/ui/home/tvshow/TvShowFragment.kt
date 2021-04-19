@@ -8,14 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviecatalogue.data.CatalogueEntity
 import com.example.moviecatalogue.databinding.FragmentTvShowBinding
-import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
 import com.example.moviecatalogue.ui.home.HomeAdapter
-import com.example.moviecatalogue.ui.home.movie.MovieViewModel
-import com.example.moviecatalogue.utils.DataDummy
 
 class TvShowFragment : Fragment() {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
