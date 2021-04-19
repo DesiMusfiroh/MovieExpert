@@ -18,6 +18,10 @@ class HomeActivity : AppCompatActivity() {
         activityHomeBinding.tabs.setupWithViewPager(activityHomeBinding.viewPager)
 
         supportActionBar?.elevation = 0f
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
     }
 }

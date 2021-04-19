@@ -40,7 +40,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         binding.tvName.text = movie.name
         binding.tvDesc.text = movie.desc
         binding.tvDate.text = movie.date
-        binding.tvRating.text = movie.rating.toString()
+        binding.tvRating.text = StringBuilder("${movie.rating}/10")
         binding.tvPopularity.text = movie.popularity.toString()
 
         Glide.with(this)
