@@ -1,9 +1,10 @@
 package com.example.moviecatalogue.ui.home.movie
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.moviecatalogue.data.CatalogueEntity
-import com.example.moviecatalogue.utils.DataDummy
+import com.example.moviecatalogue.data.model.Movie
+import com.example.moviecatalogue.data.source.CatalogueRepository
 
-class MovieViewModel : ViewModel() {
-    fun getMovies(): List<CatalogueEntity> = DataDummy.generateDummyMovies()
+class MovieViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
+    fun getMovies(): LiveData<List<Movie>> = catalogueRepository.getMovies(3)
 }
