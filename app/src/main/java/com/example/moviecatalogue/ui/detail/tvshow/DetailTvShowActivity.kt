@@ -9,9 +9,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
-import com.example.moviecatalogue.data.CatalogueEntity
+import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.databinding.ActivityDetailBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
+import com.example.moviecatalogue.utils.Constants.BACKDROP_URL
+import com.example.moviecatalogue.utils.Constants.POSTER_URL
+import com.example.moviecatalogue.viewmodel.ViewModelFactory
 
 class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
@@ -29,17 +32,18 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnBack.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailTvShowViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailTvShowViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
             tvShowId = extras.getInt(EXTRA_TV_SHOW)
             viewModel.setSelectedTvShow(tvShowId)
-            populateTvShow(viewModel.getTvShow())
+            viewModel.getTvShow().observe(this, { populateTvShow(it) })
         }
     }
 
-    private fun populateTvShow(tvShow: CatalogueEntity) {
+    private fun populateTvShow(tvShow: TvShow) {
         binding.tvName.text = tvShow.name
         binding.tvDesc.text = tvShow.desc
         binding.tvDate.text = tvShow.date
@@ -47,7 +51,7 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvPopularity.text = tvShow.popularity.toString()
 
         Glide.with(this)
-            .load(tvShow.poster)
+            .load(POSTER_URL + tvShow.poster)
             .transform(RoundedCorners(20))
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
@@ -55,7 +59,7 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
             .into(binding.imgPoster)
 
         Glide.with(this)
-            .load(tvShow.backdrop)
+            .load(BACKDROP_URL + tvShow.backdrop)
             .transform(RoundedCorners(20))
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)

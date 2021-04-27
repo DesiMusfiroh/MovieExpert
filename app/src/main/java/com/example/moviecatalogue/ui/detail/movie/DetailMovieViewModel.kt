@@ -1,24 +1,17 @@
 package com.example.moviecatalogue.ui.detail.movie
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.moviecatalogue.data.CatalogueEntity
-import com.example.moviecatalogue.utils.DataDummy
+import com.example.moviecatalogue.data.model.Movie
+import com.example.moviecatalogue.data.source.CatalogueRepository
 
-class DetailMovieViewModel : ViewModel() {
+class DetailMovieViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
     private var movieId: Int = 0
-
-    private fun getListMovie(): ArrayList<CatalogueEntity> = DataDummy.generateDummyMovies() as ArrayList<CatalogueEntity>
 
     fun setSelectedMovie(movieId: Int) {
         this.movieId = movieId
     }
 
-    fun getMovie(): CatalogueEntity {
-        lateinit var result: CatalogueEntity
-        val listMovie = getListMovie()
-        for (movieEntity in listMovie) {
-            if (movieEntity.id == movieId) result = movieEntity
-        }
-        return result
-    }
+    fun getMovie(): LiveData<Movie> = catalogueRepository.getMovie(movieId)
+
 }

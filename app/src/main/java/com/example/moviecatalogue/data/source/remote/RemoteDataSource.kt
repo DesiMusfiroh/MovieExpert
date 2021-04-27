@@ -9,6 +9,7 @@ import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.remote.response.MovieResponse
 import com.example.moviecatalogue.data.source.remote.response.TvShowResponse
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class RemoteDataSource {
@@ -62,58 +63,44 @@ class RemoteDataSource {
         })
         return tvShows
     }
+
+    fun getMovie(id: Int): LiveData<Movie> {
+
+        val movie: MutableLiveData<Movie> = MutableLiveData()
+        val client = ApiConfig.getApiService().getMovie(id)
+        client.enqueue(object : Callback<Movie> {
+            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                if (response.isSuccessful) {
+                    movie.postValue(response.body())
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Movie>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        })
+        return movie
+    }
+
+    fun getTvShow(id: Int): LiveData<TvShow> {
+
+        val tvShow: MutableLiveData<TvShow> = MutableLiveData()
+        val client = ApiConfig.getApiService().getTvShow(id)
+        client.enqueue(object : Callback<TvShow> {
+            override fun onResponse(call: Call<TvShow>, response: Response<TvShow>) {
+                if (response.isSuccessful) {
+                   tvShow.postValue(response.body())
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<TvShow>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        })
+        return tvShow
+    }
 }
-
-//        fun getInstance(helper: JsonHelper): RemoteDataSource =
-//            instance ?: synchronized(this) {
-//                instance ?: RemoteDataSource(helper).apply { instance = this }
-//            }
-
-//        // dicoding with api
-//        _isLoading.value = true
-//        val client = ApiConfig.getApiService().getRestaurant(RESTAURANT_ID)
-//        client.enqueue(object : Callback<RestaurantResponse> {
-//            override fun onResponse(
-//                call: Call<RestaurantResponse>,
-//                response: Response<RestaurantResponse>
-//            ) {
-//                _isLoading.value = false
-//                if (response.isSuccessful) {
-//                    _restaurant.value = response.body()?.restaurant
-//                    _listReview.value = response.body()?.restaurant?.customerReviews
-//                } else {
-//                    Log.e(TAG, "onFailure: ${response.message()}")
-//                }
-//            }
-//            override fun onFailure(call: Call<RestaurantResponse>, t: Throwable) {
-//                _isLoading.value = false
-//                Log.e(TAG, "onFailure: ${t.message.toString()}")
-//            }
-//        })
-
-        // github orang
-//        val movies: MutableLiveData<List<MovieResponse>> = MutableLiveData()
-//        apiClient.movies(page).enqueue(
-//            object : Callback<MovieResponse>{
-//                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-//                    Log.d(TAG, t.localizedMessage)
-//                }
-//
-//                override fun onResponse(
-//                    call: Call<MovieResponse>,
-//                    response: Response<MovieResponse>
-//                ) {
-//                    response.body()?.let { movies.postValue(it.results) }
-//                }
-//
-//            }
-//        )
-//        return movies
-
-
-//    fun getAllCourses(): List<CourseResponse> = jsonHelper.loadCourses()
-//    fun getModules(courseId: String): List<ModuleResponse> = jsonHelper.loadModule(courseId)
-//    fun getContent(moduleId: String): ContentResponse = jsonHelper.loadContent(moduleId)
-
-
-

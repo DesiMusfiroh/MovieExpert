@@ -7,4 +7,6 @@ import com.example.moviecatalogue.data.model.TvShow
 interface CatalogueDataSource {
     fun getMovies(page: Int): LiveData<List<Movie>>
     fun getTvShows(page: Int):  LiveData<List<TvShow>>
+    fun getMovie(id: Int): LiveData<Movie>
+    fun getTvShow(id: Int): LiveData<TvShow>
 }

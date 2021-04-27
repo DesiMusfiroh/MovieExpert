@@ -23,4 +23,12 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
     override fun getTvShows(page: Int): LiveData<List<TvShow>> {
         return remoteDataSource.getTvShows(page)
     }
+
+    override fun getMovie(id: Int): LiveData<Movie> {
+        return remoteDataSource.getMovie(id)
+    }
+
+    override fun getTvShow(id: Int): LiveData<TvShow> {
+        return remoteDataSource.getTvShow(id)
+    }
 }

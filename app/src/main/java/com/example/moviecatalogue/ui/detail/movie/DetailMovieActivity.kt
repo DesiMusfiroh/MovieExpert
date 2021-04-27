@@ -9,9 +9,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
-import com.example.moviecatalogue.data.CatalogueEntity
+import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.databinding.ActivityDetailBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
+import com.example.moviecatalogue.utils.Constants.BACKDROP_URL
+import com.example.moviecatalogue.utils.Constants.POSTER_URL
+import com.example.moviecatalogue.viewmodel.ViewModelFactory
 
 class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     companion object {
@@ -28,17 +31,18 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         binding.btnBack.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailMovieViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
             movieId = extras.getInt(EXTRA_MOVIE)
             viewModel.setSelectedMovie(movieId)
-            populateMovie(viewModel.getMovie())
+            viewModel.getMovie().observe(this, { populateMovie(it) })
         }
     }
 
-    private fun populateMovie(movie: CatalogueEntity) {
+    private fun populateMovie(movie: Movie) {
         binding.tvName.text = movie.name
         binding.tvDesc.text = movie.desc
         binding.tvDate.text = movie.date
@@ -46,7 +50,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         binding.tvPopularity.text = movie.popularity.toString()
 
         Glide.with(this)
-            .load(movie.poster)
+            .load(POSTER_URL + movie.poster)
             .transform(RoundedCorners(20))
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
@@ -54,7 +58,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
             .into(binding.imgPoster)
 
         Glide.with(this)
-            .load(movie.backdrop)
+            .load(BACKDROP_URL + movie.backdrop)
             .transform(RoundedCorners(20))
             .apply(
                  RequestOptions.placeholderOf(R.drawable.ic_loading)
