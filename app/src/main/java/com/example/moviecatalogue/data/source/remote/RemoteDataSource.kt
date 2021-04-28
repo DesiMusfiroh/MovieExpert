@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviecatalogue.api.ApiConfig
 import com.example.moviecatalogue.data.model.Movie
+import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.remote.response.MovieResponse
 import com.example.moviecatalogue.data.source.remote.response.TvShowResponse
@@ -84,14 +85,16 @@ class RemoteDataSource {
         return movie
     }
 
-    fun getTvShow(id: Int): LiveData<TvShow> {
+    val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()
+    fun getTvShow(id: Int) : LiveData<TvShow>{
 
         val tvShow: MutableLiveData<TvShow> = MutableLiveData()
         val client = ApiConfig.getApiService().getTvShow(id)
         client.enqueue(object : Callback<TvShow> {
             override fun onResponse(call: Call<TvShow>, response: Response<TvShow>) {
                 if (response.isSuccessful) {
-                   tvShow.postValue(response.body())
+                    tvShow.postValue(response.body())
+                    seasonsByTvShow.postValue(response.body()?.season)
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -103,4 +106,5 @@ class RemoteDataSource {
         })
         return tvShow
     }
+
 }

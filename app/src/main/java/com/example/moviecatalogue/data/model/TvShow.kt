@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class TvShow(
 
     @field:SerializedName("id")
@@ -29,5 +28,31 @@ data class TvShow(
     val popularity: Double,
 
     @field:SerializedName("vote_average")
-    val rating: Double
-) : Parcelable
+    val rating: Double,
+
+    @field:SerializedName("seasons")
+    val season: List<Season>
+)
+
+data class Season(
+    @field:SerializedName("id")
+    val id: Int,
+
+    @field:SerializedName("season_number")
+    val number: Int,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("air_date")
+    val date: String,
+
+    @field:SerializedName("overview")
+    val desc: String,
+
+    @field:SerializedName("poster_path")
+    val poster: String,
+
+    @field:SerializedName("episode_count")
+    val episode: Int
+)

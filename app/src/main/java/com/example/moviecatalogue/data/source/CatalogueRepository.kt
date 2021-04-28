@@ -2,6 +2,7 @@ package com.example.moviecatalogue.data.source
 
 import androidx.lifecycle.LiveData
 import com.example.moviecatalogue.data.model.Movie
+import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.remote.RemoteDataSource
 
@@ -30,5 +31,9 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
 
     override fun getTvShow(id: Int): LiveData<TvShow> {
         return remoteDataSource.getTvShow(id)
+    }
+
+    override fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>> {
+        return remoteDataSource.seasonsByTvShow
     }
 }

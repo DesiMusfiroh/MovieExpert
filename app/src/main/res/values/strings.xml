@@ -18,4 +18,5 @@
     <string name="send">Send</string>
     <string name="url_movie">https://www.themoviedb.org/movie/%1$d</string>
     <string name="url_tv">https://www.themoviedb.org/tv/%1$d</string>
+    <string name="season">Season</string>
 </resources>

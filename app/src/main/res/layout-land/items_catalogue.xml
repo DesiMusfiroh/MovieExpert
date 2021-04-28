@@ -15,10 +15,7 @@
         android:layout_height="250dp"
         app:cardCornerRadius="20dp"
         android:elevation="20dp"
-        app:cardMaxElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:cardMaxElevation="4dp">
 
         <ImageView
             android:id="@+id/img_poster"
