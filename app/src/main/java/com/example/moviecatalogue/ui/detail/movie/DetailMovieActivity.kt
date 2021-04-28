@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.model.Movie
-import com.example.moviecatalogue.databinding.ActivityDetailBinding
+import com.example.moviecatalogue.databinding.ActivityDetailMovieBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
 import com.example.moviecatalogue.utils.Constants.BACKDROP_URL
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
@@ -20,12 +20,12 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     companion object {
         const val EXTRA_MOVIE = "extra_movie"
     }
-    private lateinit var binding: ActivityDetailBinding
+    private lateinit var binding: ActivityDetailMovieBinding
     private var movieId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityDetailMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.btnBack.setOnClickListener(this)

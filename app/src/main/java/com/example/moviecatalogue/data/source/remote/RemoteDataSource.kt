@@ -29,7 +29,7 @@ class RemoteDataSource {
 
         val movies: MutableLiveData<List<Movie>> = MutableLiveData()
         val client = ApiConfig.getApiService().getMovies(page)
-        client.enqueue(object : retrofit2.Callback<MovieResponse> {
+        client.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
                     movies.postValue(response.body()?.results)
@@ -49,7 +49,7 @@ class RemoteDataSource {
 
         val tvShows: MutableLiveData<List<TvShow>> = MutableLiveData()
         val client = ApiConfig.getApiService().getTvShows(page)
-        client.enqueue(object : retrofit2.Callback<TvShowResponse> {
+        client.enqueue(object : Callback<TvShowResponse> {
             override fun onResponse(call: Call<TvShowResponse>, response: Response<TvShowResponse>) {
                 if (response.isSuccessful) {
                     tvShows.postValue(response.body()?.results)

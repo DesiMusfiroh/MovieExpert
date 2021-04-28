@@ -11,7 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.model.TvShow
-import com.example.moviecatalogue.databinding.ActivityDetailBinding
+import com.example.moviecatalogue.databinding.ActivityDetailTvshowBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
 import com.example.moviecatalogue.utils.Constants.BACKDROP_URL
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
@@ -22,12 +22,12 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
         const val EXTRA_TV_SHOW = "extra_tv_show"
     }
 
-    private lateinit var binding: ActivityDetailBinding
+    private lateinit var binding: ActivityDetailTvshowBinding
     private var tvShowId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityDetailTvshowBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.btnBack.setOnClickListener(this)
