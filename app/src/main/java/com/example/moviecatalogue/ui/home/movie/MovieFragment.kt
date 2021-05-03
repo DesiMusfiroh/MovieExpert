@@ -30,7 +30,7 @@ class MovieFragment : Fragment() {
             val viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
             fragmentMovieBinding.progressBar.visibility = View.VISIBLE
-            viewModel.getMovies().observe(this, {
+            viewModel.getMovies().observe(viewLifecycleOwner, {
                 fragmentMovieBinding.progressBar.visibility = View.GONE
                 movieAdapter.setMovies(it)
             })

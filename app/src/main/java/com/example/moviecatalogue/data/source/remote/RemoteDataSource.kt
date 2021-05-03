@@ -1,5 +1,7 @@
 package com.example.moviecatalogue.data.source.remote
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,18 +18,17 @@ import retrofit2.Response
 
 class RemoteDataSource {
     val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()
+
     companion object {
         @Volatile
         private var instance: RemoteDataSource? = null
-        private const val TAG = "RemoteDataSource"
-
         fun getInstance(): RemoteDataSource {
             return RemoteDataSource()
         }
+        private const val TAG = "RemoteDataSource"
     }
 
     fun getMovies(page: Int): LiveData<List<Movie>> {
-
         val movies: MutableLiveData<List<Movie>> = MutableLiveData()
         val client = ApiConfig.getApiService().getMovies(page)
         EspressoIdlingResource.increment()
@@ -119,4 +120,7 @@ class RemoteDataSource {
         return tvShow
     }
 
+    fun getSeasonsByTvShow() : LiveData<List<Season>> {
+        return seasonsByTvShow
+    }
 }

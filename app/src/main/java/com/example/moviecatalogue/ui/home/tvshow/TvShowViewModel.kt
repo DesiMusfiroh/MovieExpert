@@ -6,5 +6,5 @@ import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.CatalogueRepository
 
 class TvShowViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
-    fun getTvShow(): LiveData<List<TvShow>> = catalogueRepository.getTvShows(2)
+    fun getTvShows(): LiveData<List<TvShow>> = catalogueRepository.getTvShows(1)
 }
