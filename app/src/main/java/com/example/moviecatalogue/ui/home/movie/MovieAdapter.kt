@@ -40,6 +40,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         val movie = listMovies[position]
         holder.bind(movie)
         holder.itemView.setOnClickListener {
+            @Suppress("DEPRECATION")
             onItemClickCallback.onItemClicked(listMovies[holder.adapterPosition])
         }
     }

@@ -21,7 +21,7 @@ class FakeCatalogueRepository(private val remoteDataSource: RemoteDataSource) : 
     }
 
     override fun getTvShow(id: Int): LiveData<TvShow> {
-        return remoteDataSource.getTvShow(id,)
+        return remoteDataSource.getTvShow(id)
     }
 
     override fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>> {

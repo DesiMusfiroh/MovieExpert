@@ -40,6 +40,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         val tvShow = listTvShows[position]
         holder.bind(tvShow)
         holder.itemView.setOnClickListener {
+            @Suppress("DEPRECATION")
             onItemClickCallback.onItemClicked(listTvShows[holder.adapterPosition])
         }
     }

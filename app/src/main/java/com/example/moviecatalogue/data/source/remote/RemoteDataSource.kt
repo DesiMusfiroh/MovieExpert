@@ -1,7 +1,5 @@
 package com.example.moviecatalogue.data.source.remote
 
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,8 +18,6 @@ class RemoteDataSource {
     val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()
 
     companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
         fun getInstance(): RemoteDataSource {
             return RemoteDataSource()
         }

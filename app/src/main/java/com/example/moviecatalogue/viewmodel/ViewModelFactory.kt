@@ -10,7 +10,8 @@ import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowViewModel
 import com.example.moviecatalogue.ui.home.movie.MovieViewModel
 import com.example.moviecatalogue.ui.home.tvshow.TvShowViewModel
 
-class ViewModelFactory private constructor(private val mCatalogueRepository: CatalogueRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(private val mCatalogueRepository: CatalogueRepository)
+    : ViewModelProvider.NewInstanceFactory() {
 
     companion object {
         @Volatile
@@ -26,18 +27,18 @@ class ViewModelFactory private constructor(private val mCatalogueRepository: Cat
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        when {
+        return when {
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> {
-                return MovieViewModel(mCatalogueRepository) as T
+                MovieViewModel(mCatalogueRepository) as T
             }
             modelClass.isAssignableFrom(TvShowViewModel::class.java) -> {
-                return TvShowViewModel(mCatalogueRepository) as T
+                TvShowViewModel(mCatalogueRepository) as T
             }
             modelClass.isAssignableFrom(DetailMovieViewModel::class.java) -> {
-                return DetailMovieViewModel(mCatalogueRepository) as T
+                DetailMovieViewModel(mCatalogueRepository) as T
             }
             modelClass.isAssignableFrom(DetailTvShowViewModel::class.java) -> {
-                return DetailTvShowViewModel(mCatalogueRepository) as T
+                DetailTvShowViewModel(mCatalogueRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

@@ -205,7 +205,7 @@ object DataDummy {
                 date = "2021-03-19",
                 popularity = 7013.338,
                 rating = 7.9,
-                season = generateDummySeasons(88396)
+                season = generateDummySeasons()
             )
         )
 
@@ -367,7 +367,7 @@ object DataDummy {
         return tvShows
     }
 
-    fun generateDummyMovie(movieId: Int): Movie {
+    fun generateDummyMovie(): Movie {
         return Movie(
                 id = 399566,
                 name =  "Godzilla vs. Kong",
@@ -380,7 +380,7 @@ object DataDummy {
         )
     }
 
-    fun generateDummyTvShow(tvShowId: Int): TvShow {
+    fun generateDummyTvShow(): TvShow {
         return TvShow(
                 id = 88396,
                 name = "The Falcon and the Winter Soldier",
@@ -394,7 +394,7 @@ object DataDummy {
         )
     }
 
-    fun generateDummySeasons(tvShowId: Int): List<Season> {
+    fun generateDummySeasons(): List<Season> {
         val seasons = ArrayList<Season>()
         seasons.add(Season(
                 id = 3627,

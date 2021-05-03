@@ -21,9 +21,13 @@ interface ApiService {
     ) : Call<TvShowResponse>
 
     @GET("movie/{id}?api_key=$API_KEY")
-    fun getMovie(@Path("id") id: Int): Call<Movie>
+    fun getMovie(
+        @Path("id") id: Int
+    ) : Call<Movie>
 
     @GET("tv/{id}?api_key=$API_KEY")
-    fun getTvShow(@Path("id") id: Int): Call<TvShow>
+    fun getTvShow(
+        @Path("id") id: Int
+    ) : Call<TvShow>
 
 }

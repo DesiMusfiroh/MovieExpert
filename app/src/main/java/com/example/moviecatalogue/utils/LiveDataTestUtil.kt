@@ -26,6 +26,7 @@ object LiveDataTestUtil {
             e.printStackTrace()
         }
 
+        @Suppress("UNCHECKED_CAST")
         return data[0] as T
 
     }

@@ -25,9 +25,9 @@ class CatalogueRepositoryTest {
     private val tvShowResponses = DataDummy.generateDummyTvShows()
     private val movieId = movieResponses[0].id
     private val tvShowId = tvShowResponses[0].id
-    private val movieResponse = DataDummy.generateDummyMovie(movieId)
-    private val tvShowResponse = DataDummy.generateDummyTvShow(tvShowId)
-    private val seasonResponses = DataDummy.generateDummySeasons(tvShowId)
+    private val movieResponse = DataDummy.generateDummyMovie()
+    private val tvShowResponse = DataDummy.generateDummyTvShow()
+    private val seasonResponses = DataDummy.generateDummySeasons()
 
     @Test
     fun getMovies() {

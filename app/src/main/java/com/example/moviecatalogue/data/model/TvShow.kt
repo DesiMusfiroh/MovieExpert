@@ -1,9 +1,11 @@
 package com.example.moviecatalogue.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class TvShow(
-
         @field:SerializedName("id")
         val id: Int,
 
@@ -30,8 +32,9 @@ data class TvShow(
 
         @field:SerializedName("seasons")
         val season: List<Season>?
-)
+) : Parcelable
 
+@Parcelize
 data class Season(
     @field:SerializedName("id")
     val id: Int,
@@ -53,4 +56,4 @@ data class Season(
 
     @field:SerializedName("episode_count")
     val episode: Int
-)
+) : Parcelable
