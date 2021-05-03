@@ -44,14 +44,7 @@ class HomeActivityTest {
     @Test
     fun loadMovies() {
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_movie)).perform(scrollToPosition<RecyclerView.ViewHolder>(10))
-    }
-
-    @Test
-    fun loadTvShows() {
-        onView(withText("Tv Shows")).perform(click())
-        onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_tvshow)).perform(scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(withId(R.id.rv_movie)).perform(scrollToPosition<RecyclerView.ViewHolder>(9))
     }
 
     @Test
@@ -67,4 +60,10 @@ class HomeActivityTest {
         pressBack()
     }
 
+    @Test
+    fun loadTvShows() {
+        onView(withText("Tv Shows")).perform(click())
+        onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_tvshow)).perform(scrollToPosition<RecyclerView.ViewHolder>(9))
+    }
 }

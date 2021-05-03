@@ -34,7 +34,7 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnShare.setOnClickListener(this)
 
         val seasonAdapter = SeasonAdapter()
-        val factory = ViewModelFactory.getInstance(this)
+        val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(this, factory)[DetailTvShowViewModel::class.java]
 
         val extras = intent.extras
