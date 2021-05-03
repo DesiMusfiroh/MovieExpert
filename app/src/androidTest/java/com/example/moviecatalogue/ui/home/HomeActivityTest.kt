@@ -43,13 +43,15 @@ class HomeActivityTest {
 
     @Test
     fun loadMovies() {
+        onView(withText(R.string.movie)).perform(click())
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).perform(scrollToPosition<RecyclerView.ViewHolder>(9))
     }
 
     @Test
     fun loadDetailMovie() {
-        onView(withId(R.id.rv_movie)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movie)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.tv_name)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_desc)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_date)).check(matches(isDisplayed()))
@@ -62,8 +64,23 @@ class HomeActivityTest {
 
     @Test
     fun loadTvShows() {
-        onView(withText("Tv Shows")).perform(click())
+        onView(withId(R.id.view_pager)).perform(swipeLeft())
         onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_tvshow)).perform(scrollToPosition<RecyclerView.ViewHolder>(9))
+    }
+
+    @Test
+    fun loadDetailTvShow() {
+        onView(withText(R.string.tvshow)).perform(click())
+        onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_tvshow)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(withId(R.id.tv_name)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_desc)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_date)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_rating)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_popularity)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_season)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_season)).perform(scrollTo())
+        pressBack()
     }
 }
