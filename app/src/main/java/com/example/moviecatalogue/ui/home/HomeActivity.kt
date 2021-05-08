@@ -13,11 +13,11 @@ class HomeActivity : AppCompatActivity() {
         val activityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(activityHomeBinding.root)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        activityHomeBinding.viewPager.adapter = sectionsPagerAdapter
-        activityHomeBinding.tabs.setupWithViewPager(activityHomeBinding.viewPager)
-
-        supportActionBar?.elevation = 0f
+//        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+//        activityHomeBinding.viewPager.adapter = sectionsPagerAdapter
+//        activityHomeBinding.tabs.setupWithViewPager(activityHomeBinding.viewPager)
+//
+//        supportActionBar?.elevation = 0f
     }
 
     override fun onBackPressed() {

@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieCatalogue"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.MainActivity"></activity>
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +23,7 @@
         </activity>
         <activity android:name=".ui.detail.tvshow.DetailTvShowActivity" />
         <activity android:name=".ui.detail.movie.DetailMovieActivity" />
-        <activity android:name=".ui.home.HomeActivity"/>
+        <activity android:name=".ui.home.HomeActivity" />
     </application>
 
 </manifest>

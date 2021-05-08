@@ -1,6 +1,5 @@
 package com.example.moviecatalogue.ui.home
 
-import android.content.Context
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -9,7 +8,7 @@ import com.example.moviecatalogue.R
 import com.example.moviecatalogue.ui.home.movie.MovieFragment
 import com.example.moviecatalogue.ui.home.tvshow.TvShowFragment
 
-class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager)
+class SectionsPagerAdapter(private val mContext: HomeFragment, fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     companion object {
