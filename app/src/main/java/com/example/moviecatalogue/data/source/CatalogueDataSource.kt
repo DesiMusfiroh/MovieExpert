@@ -2,9 +2,7 @@ package com.example.moviecatalogue.data.source
 
 import androidx.lifecycle.LiveData
 import com.example.moviecatalogue.data.model.Season
-import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
-import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.vo.Resource
 

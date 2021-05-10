@@ -7,7 +7,6 @@ import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.local.LocalDataSource
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
-import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.data.source.remote.RemoteDataSource
 import com.example.moviecatalogue.utils.AppExecutors
@@ -131,31 +130,4 @@ class CatalogueRepository private constructor(
         return remoteDataSource.getSeasonsByTvShow(tvShowId)
     }
 
-//    override fun getSeasonsByTvShow(tvShowId: Int): LiveData<Resource<List<SeasonEntity>>> {
-//        return object : NetworkBoundResource<List<SeasonEntity>, List<Season>>(appExecutors) {
-//            override fun loadFromDB(): LiveData<List<SeasonEntity>> = localDataSource.getAllSeasonsByTvShow(tvShowId)
-//
-//            override fun shouldFetch(data: List<SeasonEntity>?): Boolean  = data == null || data.isEmpty()
-//
-//            override fun createCall(): LiveData<ApiResponse<List<Season>>> = remoteDataSource.getSeasonsByTvShow()
-//
-//            override fun saveCallResult(data: List<Season>) {
-//                val seasonList = ArrayList<SeasonEntity>()
-//                for (response in data) {
-//                    val season = SeasonEntity(
-//                            response.id,
-//                            tvShowId,
-//                            response.number,
-//                            response.name,
-//                            response.date,
-//                            response.desc,
-//                            response.poster,
-//                            response.episode
-//                    )
-//                    seasonList.add(season)
-//                }
-//                localDataSource.insertSeasons(seasonList)
-//            }
-//        }.asLiveData()
-//    }
 }

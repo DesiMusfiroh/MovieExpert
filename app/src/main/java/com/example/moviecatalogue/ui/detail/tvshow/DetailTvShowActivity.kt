@@ -6,14 +6,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
-import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.ActivityDetailTvshowBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
@@ -47,8 +45,6 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
             tvShowId = extras.getInt(EXTRA_TV_SHOW)
             binding.progressBar.visibility = View.VISIBLE
 
-
-
             viewModel.setSelectedTvShow(tvShowId)
             viewModel.getTvShow.observe(this, { tvShow ->
                 if (tvShow != null) {
@@ -68,19 +64,6 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
                 seasonAdapter.setSeasons(it)
             })
 
-//            viewModel.getSeasons().observe(this, {seasons ->
-//                Log.d("season", seasons.toString())
-//                if (seasons != null) {
-//                    when (seasons.status) {
-//                        Status.LOADING -> Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
-//                        Status.SUCCESS -> if (seasons.data != null) {
-//                            binding.progressBar.visibility = View.GONE
-//                            seasonAdapter.setSeasons(seasons.data)
-//                        }
-//                        Status.ERROR -> Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            })
         }
 
         with(binding.rvSeason) {

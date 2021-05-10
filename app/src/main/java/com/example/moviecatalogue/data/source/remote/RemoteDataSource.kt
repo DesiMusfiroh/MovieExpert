@@ -8,11 +8,9 @@ import com.example.moviecatalogue.api.ApiResponse
 import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
-import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.remote.response.MovieResponse
 import com.example.moviecatalogue.data.source.remote.response.TvShowResponse
 import com.example.moviecatalogue.utils.EspressoIdlingResource
-import com.example.moviecatalogue.vo.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -103,9 +101,6 @@ class RemoteDataSource {
             override fun onResponse(call: Call<TvShow>, response: Response<TvShow>) {
                 if (response.isSuccessful) {
                     tvShow.value = ApiResponse.success(response.body()!!)
-//                    seasonsByTvShow.postValue(response.body()?.season)
-//                    Log.d("season", "remote data source inside get ${seasonsByTvShow.value}")
-//                    seasonsByTvShow.value = ApiResponse.success(response.body()!!.season!!)
                     EspressoIdlingResource.decrement()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -119,10 +114,6 @@ class RemoteDataSource {
         return tvShow
     }
 
-//    fun getSeasonsByTvShow() : LiveData<List<Season>> {
-//        Log.d("season", "remote data source ${seasonsByTvShow.value}")
-//        return seasonsByTvShow
-//    }
 
     fun getSeasonsByTvShow(id: Int) : LiveData<List<Season>>{
         val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()

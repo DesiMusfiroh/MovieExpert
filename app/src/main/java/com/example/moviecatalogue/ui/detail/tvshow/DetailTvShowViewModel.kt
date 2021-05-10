@@ -1,13 +1,11 @@
 package com.example.moviecatalogue.ui.detail.tvshow
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.source.CatalogueRepository
-import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.vo.Resource
 
@@ -30,11 +28,8 @@ class DetailTvShowViewModel(private val catalogueRepository: CatalogueRepository
     }
 
     fun getSeasons(): LiveData<List<Season>> {
-        Log.d("season", "view model tv id ${this.tvShowId.value!!}")
         return catalogueRepository.getSeasonsByTvShow(this.tvShowId.value!!)
     }
-//    fun getSeasons(): LiveData<Resource<List<SeasonEntity>>> {
-//        return catalogueRepository.getSeasonsByTvShow(this.tvShowId.value!!)
-//    }
+
 
 }

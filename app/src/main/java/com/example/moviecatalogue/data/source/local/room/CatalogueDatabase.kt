@@ -5,10 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
-import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 
-@Database(entities = [MovieEntity::class, TvShowEntity::class, SeasonEntity::class], version = 3, exportSchema = false)
+@Database(entities = [MovieEntity::class, TvShowEntity::class], version = 4, exportSchema = false)
 abstract class CatalogueDatabase : RoomDatabase(){
 
     abstract fun catalogueDao(): CatalogueDao

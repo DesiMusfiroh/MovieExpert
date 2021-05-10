@@ -2,7 +2,6 @@ package com.example.moviecatalogue.data.source.local
 
 import androidx.lifecycle.LiveData
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
-import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.data.source.local.room.CatalogueDao
 
@@ -43,14 +42,5 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
         tvShow.favorited = newState
         mCatalogueDao.updateTvShow(tvShow)
     }
-
-//
-//    fun getAllSeasonsByTvShow(tvShowId: Int): LiveData<List<SeasonEntity>> =
-//            mCatalogueDao.getSeasonByTvShowId(tvShowId)
-//
-//    fun getSeason(seasonId: Int): LiveData<SeasonEntity> =
-//            mCatalogueDao.getSeason(seasonId)
-//
-//    fun insertSeasons(seasons: List<SeasonEntity>) = mCatalogueDao.insertSeasons(seasons)
 
 }
