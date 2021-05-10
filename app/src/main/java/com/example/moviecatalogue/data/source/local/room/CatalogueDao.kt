@@ -10,6 +10,9 @@ interface CatalogueDao {
     @Query("SELECT * FROM movieentities")
     fun getMovies(): LiveData<List<MovieEntity>>
 
+    @Query("SELECT * FROM movieentities WHERE movieId = :movieId")
+    fun getMovie(movieId: Int): LiveData<MovieEntity>
+
     @Query("SELECT * FROM movieentities where favorited = 1")
     fun getFavoritedMovies(): LiveData<List<MovieEntity>>
 
@@ -18,5 +21,4 @@ interface CatalogueDao {
 
     @Update
     fun updateMovie(movie: MovieEntity)
-
 }

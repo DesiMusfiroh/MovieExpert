@@ -72,16 +72,16 @@ class RemoteDataSource {
         return tvShows
     }
 
-    fun getMovie(id: Int): LiveData<Movie> {
+    fun getMovie(id: Int): LiveData<ApiResponse<Movie>> {
 
-        val movie: MutableLiveData<Movie> = MutableLiveData()
+        val movie = MutableLiveData<ApiResponse<Movie>>()
         val client = ApiConfig.getApiService().getMovie(id)
         EspressoIdlingResource.increment()
 
         client.enqueue(object : Callback<Movie> {
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
                 if (response.isSuccessful) {
-                    movie.postValue(response.body())
+                    movie.value = ApiResponse.success(response.body()!!)
                     EspressoIdlingResource.decrement()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

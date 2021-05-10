@@ -9,8 +9,12 @@ import com.example.moviecatalogue.vo.Resource
 
 interface CatalogueDataSource {
     fun getMovies(page: Int): LiveData<Resource<List<MovieEntity>>>
+    fun getMovie(id: Int): LiveData<Resource<MovieEntity>>
+
+    fun getFavoritedMovie(): LiveData<List<MovieEntity>>
+    fun setMovieFavorite(movie: MovieEntity, state: Boolean)
     fun getTvShows(page: Int):  LiveData<List<TvShow>>
-    fun getMovie(id: Int): LiveData<Movie>
+
     fun getTvShow(id: Int): LiveData<TvShow>
     fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>>
 }

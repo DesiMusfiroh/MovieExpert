@@ -4,17 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.model.Movie
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.databinding.ActivityDetailMovieBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
 import com.example.moviecatalogue.utils.Constants.BACKDROP_URL
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
+import com.example.moviecatalogue.vo.Status
 
 class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     companion object {
@@ -38,11 +41,21 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         if (extras != null) {
             movieId = extras.getInt(EXTRA_MOVIE)
             viewModel.setSelectedMovie(movieId)
-            viewModel.getMovie().observe(this, { populateMovie(it) })
+            viewModel.getMovie.observe(this, { movie ->
+                if (movie != null) {
+                    when (movie.status) {
+                        Status.LOADING -> Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
+                        Status.SUCCESS -> if (movie.data != null) {
+                            populateMovie(movie.data)
+                        }
+                        Status.ERROR -> Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
     }
 
-    private fun populateMovie(movie: Movie) {
+    private fun populateMovie(movie: MovieEntity) {
         binding.tvName.text = movie.name
         binding.tvDesc.text = movie.desc
         binding.tvDate.text = movie.date
