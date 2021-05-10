@@ -4,12 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviecatalogue.api.ApiConfig
+import com.example.moviecatalogue.api.ApiResponse
 import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.remote.response.MovieResponse
 import com.example.moviecatalogue.data.source.remote.response.TvShowResponse
 import com.example.moviecatalogue.utils.EspressoIdlingResource
+import com.example.moviecatalogue.vo.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,15 +27,15 @@ class RemoteDataSource {
         private const val TAG = "RemoteDataSource"
     }
 
-    fun getMovies(page: Int): LiveData<List<Movie>> {
-        val movies: MutableLiveData<List<Movie>> = MutableLiveData()
+    fun getMovies(page: Int): LiveData<ApiResponse<List<Movie>>> {
+        val resultMovies = MutableLiveData<ApiResponse<List<Movie>>>()
         val client = ApiConfig.getApiService().getMovies(page)
         EspressoIdlingResource.increment()
 
         client.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
-                    movies.postValue(response.body()?.results)
+                    resultMovies.value = ApiResponse.success(response.body()!!.results)
                     EspressoIdlingResource.decrement()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -43,7 +46,7 @@ class RemoteDataSource {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
-        return movies
+        return resultMovies
     }
 
     fun getTvShows(page: Int): LiveData<List<TvShow>> {

@@ -31,7 +31,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         binding.btnBack.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
 
-        val factory = ViewModelFactory.getInstance()
+        val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
         val extras = intent.extras
