@@ -50,11 +50,6 @@ class MovieFragment : Fragment() {
                     }
                 }
             })
-            with(fragmentMovieBinding.rvMovie) {
-                this.layoutManager = LinearLayoutManager(context)
-                this.setHasFixedSize(true)
-                this.adapter = movieAdapter
-            }
 
             movieAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: MovieEntity) {

@@ -20,8 +20,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this@HomeFragment, childFragmentManager)
-        fragmentHomeBinding.viewPager.adapter = sectionsPagerAdapter
-        fragmentHomeBinding.tabs.setupWithViewPager(fragmentHomeBinding.viewPager)
+        fragmentHomeBinding.apply {
+            viewPager.adapter = sectionsPagerAdapter
+            tabs.setupWithViewPager(viewPager)
+        }
     }
-
 }

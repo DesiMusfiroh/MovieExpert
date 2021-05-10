@@ -14,7 +14,7 @@ interface CatalogueDao {
     fun getMovie(movieId: Int): LiveData<MovieEntity>
 
     @Query("SELECT * FROM movieentities where favorited = 1")
-    fun getFavoritedMovies(): LiveData<List<MovieEntity>>
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movies: List<MovieEntity>)

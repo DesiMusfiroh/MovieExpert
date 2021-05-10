@@ -70,8 +70,7 @@ class CatalogueRepository private constructor(
         }.asLiveData()
     }
 
-
-    override fun getFavoritedMovie(): LiveData<List<MovieEntity>> = localDataSource.getFavoritedMovies()
+    override fun getFavoriteMovies(): LiveData<List<MovieEntity>> = localDataSource.getFavoriteMovies()
 
     override fun setMovieFavorite(movie: MovieEntity, state: Boolean) =
         appExecutors.diskIO().execute { localDataSource.setMovieFavorite(movie, state) }
