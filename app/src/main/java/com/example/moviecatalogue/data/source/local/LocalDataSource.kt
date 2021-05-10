@@ -2,6 +2,8 @@ package com.example.moviecatalogue.data.source.local
 
 import androidx.lifecycle.LiveData
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
+import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.data.source.local.room.CatalogueDao
 
 class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDao) {
@@ -26,4 +28,29 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
         movie.favorited = newState
         mCatalogueDao.updateMovie(movie)
     }
+
+
+    fun getTvShows(): LiveData<List<TvShowEntity>> = mCatalogueDao.getTvShows()
+
+    fun getTvShow(tvShowId: Int): LiveData<TvShowEntity> =
+            mCatalogueDao.getTvShow(tvShowId)
+
+    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>> = mCatalogueDao.getFavoriteTvShows()
+
+    fun insertTvShows(tvShows: List<TvShowEntity>) = mCatalogueDao.insertTvShows(tvShows)
+
+    fun setTvShowFavorite(tvShow: TvShowEntity, newState: Boolean) {
+        tvShow.favorited = newState
+        mCatalogueDao.updateTvShow(tvShow)
+    }
+
+//
+//    fun getAllSeasonsByTvShow(tvShowId: Int): LiveData<List<SeasonEntity>> =
+//            mCatalogueDao.getSeasonByTvShowId(tvShowId)
+//
+//    fun getSeason(seasonId: Int): LiveData<SeasonEntity> =
+//            mCatalogueDao.getSeason(seasonId)
+//
+//    fun insertSeasons(seasons: List<SeasonEntity>) = mCatalogueDao.insertSeasons(seasons)
+
 }

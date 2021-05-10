@@ -1,18 +1,40 @@
 package com.example.moviecatalogue.ui.detail.tvshow
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.moviecatalogue.data.model.Season
-import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.CatalogueRepository
+import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
+import com.example.moviecatalogue.vo.Resource
 
 class DetailTvShowViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
-    private var tvShowId : Int = 0
+    val tvShowId = MutableLiveData<Int>()
 
     fun setSelectedTvShow(tvShowId: Int) {
-        this.tvShowId = tvShowId
+        this.tvShowId.value = tvShowId
     }
 
-    fun getTvShow(): LiveData<TvShow> = catalogueRepository.getTvShow(tvShowId)
-    fun getSeasons(): LiveData<List<Season>> = catalogueRepository.getSeasonsByTvShow(tvShowId)
+    var getTvShow: LiveData<Resource<TvShowEntity>> = Transformations.switchMap(tvShowId) { mTvShowId ->
+        catalogueRepository.getTvShow(mTvShowId)
+    }
+
+    fun setFavorite() {
+        val tvShowResource = getTvShow.value
+        val tvShowEntity = tvShowResource?.data
+        val newState = !tvShowEntity?.favorited!!
+        catalogueRepository.setTvShowFavorite(tvShowEntity, newState)
+    }
+
+    fun getSeasons(): LiveData<List<Season>> {
+        Log.d("season", "view model tv id ${this.tvShowId.value!!}")
+        return catalogueRepository.getSeasonsByTvShow(this.tvShowId.value!!)
+    }
+//    fun getSeasons(): LiveData<Resource<List<SeasonEntity>>> {
+//        return catalogueRepository.getSeasonsByTvShow(this.tvShowId.value!!)
+//    }
+
 }

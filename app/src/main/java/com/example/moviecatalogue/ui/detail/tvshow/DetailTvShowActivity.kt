@@ -2,8 +2,11 @@ package com.example.moviecatalogue.ui.detail.tvshow
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -11,11 +14,13 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.model.TvShow
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.ActivityDetailTvshowBinding
 import com.example.moviecatalogue.ui.home.HomeActivity
 import com.example.moviecatalogue.utils.Constants.BACKDROP_URL
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
+import com.example.moviecatalogue.vo.Status
 
 class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
@@ -42,13 +47,42 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
             tvShowId = extras.getInt(EXTRA_TV_SHOW)
             binding.progressBar.visibility = View.VISIBLE
 
+
+
             viewModel.setSelectedTvShow(tvShowId)
+            viewModel.getTvShow.observe(this, { tvShow ->
+                if (tvShow != null) {
+                    when (tvShow.status) {
+                        Status.LOADING -> Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
+                        Status.SUCCESS -> if (tvShow.data != null) {
+                            populateTvShow(tvShow.data)
+                        }
+                        Status.ERROR -> Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+
             viewModel.getSeasons().observe(this, {
+                Log.d("season", "activity it $it}")
                 binding.progressBar.visibility = View.GONE
                 seasonAdapter.setSeasons(it)
             })
-            viewModel.getTvShow().observe(this, { populateTvShow(it) })
+
+//            viewModel.getSeasons().observe(this, {seasons ->
+//                Log.d("season", seasons.toString())
+//                if (seasons != null) {
+//                    when (seasons.status) {
+//                        Status.LOADING -> Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
+//                        Status.SUCCESS -> if (seasons.data != null) {
+//                            binding.progressBar.visibility = View.GONE
+//                            seasonAdapter.setSeasons(seasons.data)
+//                        }
+//                        Status.ERROR -> Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            })
         }
+
         with(binding.rvSeason) {
             isNestedScrollingEnabled = false
             layoutManager = LinearLayoutManager(this@DetailTvShowActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -57,7 +91,7 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun populateTvShow(tvShow: TvShow) {
+    private fun populateTvShow(tvShow: TvShowEntity) {
         binding.tvName.text = tvShow.name
         binding.tvDesc.text = tvShow.desc
         binding.tvDate.text = tvShow.date

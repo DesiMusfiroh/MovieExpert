@@ -7,6 +7,8 @@ import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.local.LocalDataSource
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
+import com.example.moviecatalogue.data.source.local.entity.SeasonEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.data.source.remote.RemoteDataSource
 import com.example.moviecatalogue.utils.AppExecutors
 import com.example.moviecatalogue.vo.Resource
@@ -76,19 +78,84 @@ class CatalogueRepository private constructor(
         appExecutors.diskIO().execute { localDataSource.setMovieFavorite(movie, state) }
 
 
-    override fun getTvShows(page: Int): LiveData<List<TvShow>> {
-        return remoteDataSource.getTvShows(page)
+    override fun getTvShows(page: Int): LiveData<Resource<List<TvShowEntity>>> {
+        return object : NetworkBoundResource<List<TvShowEntity>, List<TvShow>>(appExecutors) {
+            override fun loadFromDB(): LiveData<List<TvShowEntity>> = localDataSource.getTvShows()
+
+            override fun shouldFetch(data: List<TvShowEntity>?): Boolean = data == null || data.isEmpty()
+
+            override fun createCall(): LiveData<ApiResponse<List<TvShow>>> = remoteDataSource.getTvShows(1)
+
+            override fun saveCallResult(data: List<TvShow>) {
+                val tvShowList = ArrayList<TvShowEntity>()
+                for (response in data) {
+                    val tvShow = TvShowEntity(
+                            response.id,
+                            response.name,
+                            response.desc,
+                            response.poster,
+                            response.backdrop,
+                            response.date,
+                            response.popularity,
+                            response.rating,
+                            false
+                    )
+                    tvShowList.add(tvShow)
+                }
+                localDataSource.insertTvShows(tvShowList)
+            }
+        }.asLiveData()
     }
 
-//    override fun getMovie(id: Int): LiveData<Movie> {
-//        return remoteDataSource.getMovie(id)
-//    }
+    override fun getTvShow(id: Int): LiveData<Resource<TvShowEntity>> {
+        return object : NetworkBoundResource<TvShowEntity, TvShow>(appExecutors) {
+            override fun loadFromDB(): LiveData<TvShowEntity> = localDataSource.getTvShow(id)
 
-    override fun getTvShow(id: Int): LiveData<TvShow> {
-        return remoteDataSource.getTvShow(id)
+            override fun shouldFetch(data: TvShowEntity?): Boolean = data == null
+
+            override fun createCall(): LiveData<ApiResponse<TvShow>> = remoteDataSource.getTvShow(id)
+
+            override fun saveCallResult(data: TvShow) {
+                localDataSource.getTvShow(id)
+            }
+
+        }.asLiveData()
     }
+
+    override fun getFavoriteTvShows(): LiveData<List<TvShowEntity>> = localDataSource.getFavoriteTvShows()
+
+    override fun setTvShowFavorite(tvShow: TvShowEntity, state: Boolean) =
+            appExecutors.diskIO().execute { localDataSource.setTvShowFavorite(tvShow, state) }
 
     override fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>> {
-        return remoteDataSource.getSeasonsByTvShow()
+        return remoteDataSource.getSeasonsByTvShow(tvShowId)
     }
+
+//    override fun getSeasonsByTvShow(tvShowId: Int): LiveData<Resource<List<SeasonEntity>>> {
+//        return object : NetworkBoundResource<List<SeasonEntity>, List<Season>>(appExecutors) {
+//            override fun loadFromDB(): LiveData<List<SeasonEntity>> = localDataSource.getAllSeasonsByTvShow(tvShowId)
+//
+//            override fun shouldFetch(data: List<SeasonEntity>?): Boolean  = data == null || data.isEmpty()
+//
+//            override fun createCall(): LiveData<ApiResponse<List<Season>>> = remoteDataSource.getSeasonsByTvShow()
+//
+//            override fun saveCallResult(data: List<Season>) {
+//                val seasonList = ArrayList<SeasonEntity>()
+//                for (response in data) {
+//                    val season = SeasonEntity(
+//                            response.id,
+//                            tvShowId,
+//                            response.number,
+//                            response.name,
+//                            response.date,
+//                            response.desc,
+//                            response.poster,
+//                            response.episode
+//                    )
+//                    seasonList.add(season)
+//                }
+//                localDataSource.insertSeasons(seasonList)
+//            }
+//        }.asLiveData()
+//    }
 }

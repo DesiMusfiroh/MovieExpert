@@ -7,22 +7,23 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.model.TvShow
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.ItemsCatalogueBinding
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
-    private var listTvShows = ArrayList<TvShow>()
+    private var listTvShows = ArrayList<TvShowEntity>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: TvShow)
+        fun onItemClicked(data: TvShowEntity)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    fun setTvShows(tvShows: List<TvShow>?) {
+    fun setTvShows(tvShows: List<TvShowEntity>?) {
         if (tvShows == null) return
         this.listTvShows.clear()
         this.listTvShows.addAll(tvShows)
@@ -46,7 +47,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     }
 
     class TvShowViewHolder(private val binding: ItemsCatalogueBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: TvShow) {
+        fun bind(tvShow: TvShowEntity) {
             with(binding) {
                 tvItemName.text = tvShow.name
                 tvItemDate.text = tvShow.date

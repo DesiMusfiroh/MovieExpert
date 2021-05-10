@@ -18,7 +18,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RemoteDataSource {
-    val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()
 
     companion object {
         fun getInstance(): RemoteDataSource {
@@ -49,16 +48,15 @@ class RemoteDataSource {
         return resultMovies
     }
 
-    fun getTvShows(page: Int): LiveData<List<TvShow>> {
-
-        val tvShows: MutableLiveData<List<TvShow>> = MutableLiveData()
+    fun getTvShows(page: Int): LiveData<ApiResponse<List<TvShow>>> {
+        val resultTvShows = MutableLiveData<ApiResponse<List<TvShow>>>()
         val client = ApiConfig.getApiService().getTvShows(page)
         EspressoIdlingResource.increment()
 
         client.enqueue(object : Callback<TvShowResponse> {
             override fun onResponse(call: Call<TvShowResponse>, response: Response<TvShowResponse>) {
                 if (response.isSuccessful) {
-                    tvShows.postValue(response.body()?.results)
+                    resultTvShows.value = ApiResponse.success(response.body()!!.results)
                     EspressoIdlingResource.decrement()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -69,7 +67,7 @@ class RemoteDataSource {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
-        return tvShows
+        return resultTvShows
     }
 
     fun getMovie(id: Int): LiveData<ApiResponse<Movie>> {
@@ -95,17 +93,19 @@ class RemoteDataSource {
         return movie
     }
 
-    fun getTvShow(id: Int) : LiveData<TvShow>{
+    fun getTvShow(id: Int) : LiveData<ApiResponse<TvShow>>{
 
-        val tvShow: MutableLiveData<TvShow> = MutableLiveData()
+        val tvShow = MutableLiveData<ApiResponse<TvShow>>()
         val client = ApiConfig.getApiService().getTvShow(id)
         EspressoIdlingResource.increment()
 
         client.enqueue(object : Callback<TvShow> {
             override fun onResponse(call: Call<TvShow>, response: Response<TvShow>) {
                 if (response.isSuccessful) {
-                    tvShow.postValue(response.body())
-                    seasonsByTvShow.postValue(response.body()?.season)
+                    tvShow.value = ApiResponse.success(response.body()!!)
+//                    seasonsByTvShow.postValue(response.body()?.season)
+//                    Log.d("season", "remote data source inside get ${seasonsByTvShow.value}")
+//                    seasonsByTvShow.value = ApiResponse.success(response.body()!!.season!!)
                     EspressoIdlingResource.decrement()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -119,7 +119,32 @@ class RemoteDataSource {
         return tvShow
     }
 
-    fun getSeasonsByTvShow() : LiveData<List<Season>> {
+//    fun getSeasonsByTvShow() : LiveData<List<Season>> {
+//        Log.d("season", "remote data source ${seasonsByTvShow.value}")
+//        return seasonsByTvShow
+//    }
+
+    fun getSeasonsByTvShow(id: Int) : LiveData<List<Season>>{
+        val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()
+        val tvShow = MutableLiveData<TvShow>()
+        val client = ApiConfig.getApiService().getTvShow(id)
+        EspressoIdlingResource.increment()
+
+        client.enqueue(object : Callback<TvShow> {
+            override fun onResponse(call: Call<TvShow>, response: Response<TvShow>) {
+                if (response.isSuccessful) {
+                    seasonsByTvShow.postValue(response.body()?.season)
+                    Log.d("season", "remote data source inside get ${seasonsByTvShow.value}")
+                    EspressoIdlingResource.decrement()
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<TvShow>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        })
         return seasonsByTvShow
     }
 }

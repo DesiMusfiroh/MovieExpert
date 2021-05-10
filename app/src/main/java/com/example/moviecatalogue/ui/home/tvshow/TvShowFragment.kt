@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviecatalogue.data.model.TvShow
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.FragmentTvShowBinding
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
+import com.example.moviecatalogue.vo.Status
 
 class TvShowFragment : Fragment() {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
@@ -30,13 +33,26 @@ class TvShowFragment : Fragment() {
             val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
             fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
-            viewModel.getTvShows().observe(viewLifecycleOwner, {
-                fragmentTvShowBinding.progressBar.visibility = View.GONE
-                tvShowAdapter.setTvShows(it)
+            viewModel.getTvShows().observe(viewLifecycleOwner, {tvShows ->
+                if (tvShows != null) {
+                    when (tvShows.status) {
+                        Status.LOADING -> fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            fragmentTvShowBinding.progressBar.visibility = View.GONE
+                            tvShowAdapter.setTvShows(tvShows.data)
+                            tvShowAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            fragmentTvShowBinding.progressBar.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             })
 
+
             tvShowAdapter.setOnItemClickCallback(object : TvShowAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: TvShow) {
+                override fun onItemClicked(data: TvShowEntity) {
                     Intent(activity, DetailTvShowActivity::class.java).also {
                         it.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, data.id)
                         startActivity(it)
