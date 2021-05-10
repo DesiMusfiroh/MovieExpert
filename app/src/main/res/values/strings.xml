@@ -22,4 +22,5 @@
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_search">Search</string>
+    <string name="menu_detail">Menu Detail</string>
 </resources>
