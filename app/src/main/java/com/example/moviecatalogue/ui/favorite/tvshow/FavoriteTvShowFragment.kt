@@ -9,13 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.FragmentTvShowBinding
-import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
-import com.example.moviecatalogue.ui.favorite.movie.FavoriteMovieViewModel
-import com.example.moviecatalogue.ui.home.movie.MovieAdapter
 import com.example.moviecatalogue.ui.home.tvshow.TvShowAdapter
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
 
