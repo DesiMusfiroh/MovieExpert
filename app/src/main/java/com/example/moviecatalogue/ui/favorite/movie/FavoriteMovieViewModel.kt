@@ -1,5 +1,6 @@
 package com.example.moviecatalogue.ui.favorite.movie
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviecatalogue.data.source.CatalogueRepository

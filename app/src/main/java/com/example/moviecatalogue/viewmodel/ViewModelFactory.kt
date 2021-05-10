@@ -7,6 +7,9 @@ import com.example.moviecatalogue.data.source.CatalogueRepository
 import com.example.moviecatalogue.di.Injection
 import com.example.moviecatalogue.ui.detail.movie.DetailMovieViewModel
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowViewModel
+import com.example.moviecatalogue.ui.favorite.movie.FavoriteMovieViewModel
+import com.example.moviecatalogue.ui.favorite.tvshow.FavoriteTvShowFragment
+import com.example.moviecatalogue.ui.favorite.tvshow.FavoriteTvShowViewModel
 import com.example.moviecatalogue.ui.home.movie.MovieViewModel
 import com.example.moviecatalogue.ui.home.tvshow.TvShowViewModel
 
@@ -37,6 +40,12 @@ class ViewModelFactory private constructor(private val mCatalogueRepository: Cat
             }
             modelClass.isAssignableFrom(DetailTvShowViewModel::class.java) -> {
                 DetailTvShowViewModel(mCatalogueRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteMovieViewModel::class.java) -> {
+                FavoriteMovieViewModel(mCatalogueRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteTvShowViewModel::class.java) -> {
+                FavoriteTvShowViewModel(mCatalogueRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
