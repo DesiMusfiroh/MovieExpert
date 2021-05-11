@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.CatalogueRepository
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.utils.DataDummy
+import com.example.moviecatalogue.vo.Resource
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
@@ -28,7 +31,7 @@ class TvShowViewModelTest {
     private lateinit var catalogueRepository: CatalogueRepository
 
     @Mock
-    private lateinit var observer: Observer<List<TvShow>>
+    private lateinit var observer: Observer<Resource<List<TvShowEntity>>>
 
     @Before
     fun setUp() {
@@ -37,12 +40,12 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvShows() {
-        val dummyTvShows = DataDummy.generateDummyTvShows()
-        val tvShows = MutableLiveData<List<TvShow>>()
+        val dummyTvShows = Resource.success(DataDummy.generateDummyTvShows())
+        val tvShows = MutableLiveData<Resource<List<TvShowEntity>>>()
         tvShows.value = dummyTvShows
 
         `when`(catalogueRepository.getTvShows(1)).thenReturn(tvShows)
-        val tvShowsEntities = viewModel.getTvShows().value
+        val tvShowsEntities = viewModel.getTvShows().value?.data
         verify(catalogueRepository).getTvShows(1)
         assertNotNull(tvShowsEntities)
         assertEquals(12, tvShowsEntities?.size)

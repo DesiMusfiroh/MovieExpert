@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
+import com.example.moviecatalogue.data.source.local.LocalDataSource
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.data.source.remote.RemoteDataSource
+import com.example.moviecatalogue.utils.AppExecutors
 import com.example.moviecatalogue.utils.DataDummy
 import com.example.moviecatalogue.utils.LiveDataTestUtil
 import org.junit.Assert.*
@@ -19,7 +23,10 @@ class CatalogueRepositoryTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val remote = mock(RemoteDataSource::class.java)
-    private val catalogueRepository = FakeCatalogueRepository(remote)
+    private val local = mock(LocalDataSource::class.java)
+    private val appExecutors = mock(AppExecutors::class.java)
+
+    private val catalogueRepository = FakeCatalogueRepository(remote, local, appExecutors)
 
     private val movieResponses = DataDummy.generateDummyMovies()
     private val tvShowResponses = DataDummy.generateDummyTvShows()
@@ -31,50 +38,74 @@ class CatalogueRepositoryTest {
 
     @Test
     fun getMovies() {
-        val movies = MutableLiveData<List<Movie>>()
-        movies.value = movieResponses
+        val dummyMovies = MutableLiveData<List<MovieEntity>>()
+        dummyMovies.value = DataDummy.generateDummyMovies()
+        `when`(local.getMovies()).thenReturn(dummyMovies)
 
-        `when`(remote.getMovies(1)).thenReturn(movies)
         val movieEntities = LiveDataTestUtil.getValue(catalogueRepository.getMovies(1))
-        verify(remote).getMovies(1)
+        verify(local).getMovies()
+        assertNotNull(movieEntities.data)
+        assertEquals(movieResponses.size.toLong(), movieEntities.data?.size?.toLong())
+    }
+
+    @Test
+    fun getTvShows() {
+        val dummyTvShows = MutableLiveData<List<TvShowEntity>>()
+        dummyTvShows.value = DataDummy.generateDummyTvShows()
+        `when`(local.getTvShows()).thenReturn(dummyTvShows)
+
+        val tvShowEntities = LiveDataTestUtil.getValue(catalogueRepository.getTvShows(1))
+        verify(local).getTvShows()
+        assertNotNull(tvShowEntities.data)
+        assertEquals(tvShowResponses.size.toLong(), tvShowEntities.data?.size?.toLong())
+    }
+
+    @Test
+    fun getMovie() {
+        val dummyEntity = MutableLiveData<MovieEntity>()
+        dummyEntity.value = DataDummy.generateDummyMovie()
+        `when`(local.getMovie(movieId)).thenReturn(dummyEntity)
+
+        val resultMovie = LiveDataTestUtil.getValue(catalogueRepository.getMovie(movieId))
+        verify(local).getMovie(movieId)
+        assertNotNull(resultMovie.data)
+        assertEquals(movieResponse.name, resultMovie.data?.name)
+    }
+
+    @Test
+    fun getTvShow() {
+        val dummyEntity = MutableLiveData<TvShowEntity>()
+        dummyEntity.value = DataDummy.generateDummyTvShow()
+        `when`(local.getTvShow(tvShowId)).thenReturn(dummyEntity)
+
+        val resultTvShow = LiveDataTestUtil.getValue(catalogueRepository.getTvShow(tvShowId))
+        verify(local).getTvShow(tvShowId)
+        assertNotNull(resultTvShow)
+        assertEquals(tvShowResponse.name, resultTvShow.data?.name)
+    }
+
+    @Test
+    fun getFavoriteMovies() {
+        val dummyMovies = MutableLiveData<List<MovieEntity>>()
+        dummyMovies.value = DataDummy.generateDummyMovies()
+        `when`(local.getFavoriteMovies()).thenReturn(dummyMovies)
+
+        val movieEntities = LiveDataTestUtil.getValue(catalogueRepository.getFavoriteMovies())
+        verify(local).getFavoriteMovies()
         assertNotNull(movieEntities)
         assertEquals(movieResponses.size.toLong(), movieEntities.size.toLong())
     }
 
     @Test
-    fun getTvShows() {
-        val tvShow = MutableLiveData<List<TvShow>>()
-        tvShow.value = tvShowResponses
+    fun getFavoriteTvShows() {
+        val dummyTvShows = MutableLiveData<List<TvShowEntity>>()
+        dummyTvShows.value = DataDummy.generateDummyTvShows()
+        `when`(local.getFavoriteTvShows()).thenReturn(dummyTvShows)
 
-        `when`(remote.getTvShows(1)).thenReturn(tvShow)
-        val tvShowEntities = LiveDataTestUtil.getValue(catalogueRepository.getTvShows(1))
-        verify(remote).getTvShows(1)
+        val tvShowEntities = LiveDataTestUtil.getValue(catalogueRepository.getFavoriteTvShows())
+        verify(local).getFavoriteTvShows()
         assertNotNull(tvShowEntities)
         assertEquals(tvShowResponses.size.toLong(), tvShowEntities.size.toLong())
-    }
-
-    @Test
-    fun getMovie() {
-        val movie = MutableLiveData<Movie>()
-        movie.value = movieResponse
-
-        `when`(remote.getMovie(movieId)).thenReturn(movie)
-        val resultMovie = catalogueRepository.getMovie(movieId)
-        verify(remote).getMovie(movieId)
-        assertNotNull(resultMovie)
-        assertEquals(movieResponse.name, resultMovie.value?.name)
-    }
-
-    @Test
-    fun getTvShow() {
-        val tvShow = MutableLiveData<TvShow>()
-        tvShow.value = tvShowResponse
-
-        `when`(remote.getTvShow(tvShowId)).thenReturn(tvShow)
-        val resultTvShow = catalogueRepository.getTvShow(tvShowId)
-        verify(remote).getTvShow(tvShowId)
-        assertNotNull(resultTvShow)
-        assertEquals(tvShowResponse.name, resultTvShow.value?.name)
     }
 
     @Test
@@ -82,9 +113,9 @@ class CatalogueRepositoryTest {
         val season = MutableLiveData<List<Season>>()
         season.value = seasonResponses
 
-        `when`(remote.getSeasonsByTvShow()).thenReturn(season)
+        `when`(remote.getSeasonsByTvShow(tvShowId)).thenReturn(season)
         val seasonEntities = LiveDataTestUtil.getValue(catalogueRepository.getSeasonsByTvShow(tvShowId))
-        verify(remote).getSeasonsByTvShow()
+        verify(remote).getSeasonsByTvShow(tvShowId)
         assertNotNull(seasonEntities)
         assertEquals(seasonResponses.size.toLong(), seasonEntities.size.toLong())
     }

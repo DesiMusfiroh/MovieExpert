@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.CatalogueRepository
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.utils.DataDummy
+import com.example.moviecatalogue.vo.Resource
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
@@ -13,13 +16,15 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class DetailTvShowViewModelTest {
     private lateinit var viewModel: DetailTvShowViewModel
-    private val dummyTvShow = DataDummy.generateDummyTvShows()[0]
-    private val tvShowId = dummyTvShow.id
+    private val dummyTvShow = Resource.success(DataDummy.generateDummyTvShows()[0])
+    private val tvShowId = dummyTvShow.data?.id
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -28,32 +33,23 @@ class DetailTvShowViewModelTest {
     private lateinit var catalogueRepository: CatalogueRepository
 
     @Mock
-    private lateinit var observer: Observer<TvShow>
+    private lateinit var observer: Observer<Resource<TvShowEntity>>
 
     @Before
     fun setUp() {
         viewModel = DetailTvShowViewModel(catalogueRepository)
-        viewModel.setSelectedTvShow(tvShowId)
+        viewModel.setSelectedTvShow(tvShowId!!)
     }
 
     @Test
-    fun getMovie() {
-        val tvShow = MutableLiveData<TvShow>()
+    fun getTvShow() {
+        val dummyTvShow = Resource.success(DataDummy.generateDummyTvShow())
+        val tvShow = MutableLiveData<Resource<TvShowEntity>>()
         tvShow.value = dummyTvShow
 
-        Mockito.`when`(catalogueRepository.getTvShow(tvShowId)).thenReturn(tvShow)
-        val tvShowEntity = viewModel.getTvShow().value as TvShow
-        Mockito.verify(catalogueRepository).getTvShow(tvShowId)
-        assertEquals(dummyTvShow.id, tvShowEntity.id)
-        assertEquals(dummyTvShow.name, tvShowEntity.name)
-        assertEquals(dummyTvShow.desc, tvShowEntity.desc)
-        assertEquals(dummyTvShow.poster, tvShowEntity.poster)
-        assertEquals(dummyTvShow.backdrop, tvShowEntity.backdrop)
-        assertEquals(dummyTvShow.date, tvShowEntity.date)
-        assertEquals(dummyTvShow.rating, tvShowEntity.rating, 0.001)
-        assertEquals(dummyTvShow.popularity, tvShowEntity.popularity, 0.001)
+        `when`(catalogueRepository.getTvShow(tvShowId!!)).thenReturn(tvShow)
 
-        viewModel.getTvShow().observeForever(observer)
-        Mockito.verify(observer).onChanged(dummyTvShow)
+        viewModel.getTvShow.observeForever(observer)
+        verify(observer).onChanged(dummyTvShow)
     }
 }

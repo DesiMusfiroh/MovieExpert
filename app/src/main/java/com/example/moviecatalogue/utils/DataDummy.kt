@@ -3,13 +3,15 @@ package com.example.moviecatalogue.utils
 import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.model.TvShow
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
+import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 
 object DataDummy {
-    fun generateDummyMovies(): List<Movie> {
-        val movies = ArrayList<Movie>()
+    fun generateDummyMovies(): List<MovieEntity> {
+        val movies = ArrayList<MovieEntity>()
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 399566,
                 name =  "Godzilla vs. Kong",
                 desc = "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
@@ -22,7 +24,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 791373,
                 name =  "Zack Snyder's Justice League",
                 desc = "Determined to ensure Superman's ultimate sacrifice was not in vain, Bruce Wayne aligns forces with Diana Prince with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions.",
@@ -35,7 +37,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 412656,
                 name =  "Chaos Walking",
                 desc = "Two unlikely companions embark on a perilous adventure through the badlands of an unexplored planet as they try to escape a dangerous and disorienting reality, where all inner thoughts are seen and heard by everyone.",
@@ -48,7 +50,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 460465,
                 name =  "Mortal Kombat",
                 desc = "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
@@ -61,7 +63,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 527774,
                 name =  "Raya and the Last Dragon",
                 desc = "Long ago, in the fantasy world of Kumandra, humans and dragons lived together in harmony. But when an evil force threatened the land, the dragons sacrificed themselves to save humanity. Now, 500 years later, that same evil has returned and it’s up to a lone warrior, Raya, to track down the legendary last dragon to restore the fractured land and its divided people.",
@@ -74,7 +76,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 644083,
                 name =  "Twist",
                 desc =  "A Dicken’s classic brought thrillingly up to date in the teeming heartland of modern London, where a group of street smart young hustlers plan the heist of the century for the ultimate payday.",
@@ -87,7 +89,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 458576,
                 name =  "Monster Hunter",
                 desc = "A portal transports Cpt. Artemis and an elite unit of soldiers to a strange world where powerful monsters rule with deadly ferocity. Faced with relentless danger, the team encounters a mysterious hunter who may be their only hope to find a way home.",
@@ -100,7 +102,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 464052,
                 name =  "Wonder Woman 1984",
                 desc = "A botched store robbery places Wonder Woman in a global battle against a powerful and mysterious ancient force that puts her powers in jeopardy.",
@@ -113,7 +115,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 632357,
                 name =  "The Unholy",
                 desc = "Alice, a young hearing-impaired girl who, after a supposed visitation from the Virgin Mary, is inexplicably able to hear, speak and heal the sick. As word spreads and people from near and far flock to witness her miracles, a disgraced journalist hoping to revive his career visits the small New England town to investigate. When terrifying events begin to happen all around, he starts to question if these phenomena are the works of the Virgin Mary or something much more sinister.",
@@ -126,7 +128,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 522444,
                 name =  "Black Water: Abyss",
                 desc =  "An adventure-loving couple convince their friends to explore a remote, uncharted cave system in the forests of Northern Australia. With a tropical storm approaching, they abseil into the mouth of the cave, but when the caves start to flood, tensions rise as oxygen levels fall and the friends find themselves trapped. Unknown to them, the storm has also brought in a pack of dangerous and hungry crocodiles.",
@@ -139,7 +141,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 41800,
                 name =  "Superman and the Mole-Men",
                 desc = "Reporters Clark Kent and Lois Lane arrive in the small town of Silsby to witness the drilling of the world's deepest oil well. The drill, however, has penetrated the underground home of a race of small, furry people who then come to the surface at night to look around. The fact that they glow in the dark scares the townfolk, who form a mob, led by the vicious Luke Benson, intent on killing the strange people. Only Superman has a chance to prevent this tragedy.",
@@ -152,7 +154,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 155,
                 name =  "The Dark Knight",
                 desc = "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
@@ -165,7 +167,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 297802,
                 name =  "Aquaman",
                 desc = "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne.",
@@ -178,7 +180,7 @@ object DataDummy {
         )
 
         movies.add(
-                Movie(
+            MovieEntity(
                 id = 297761,
                 name =  "Suicide Squad",
                 desc = "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",
@@ -192,11 +194,11 @@ object DataDummy {
         return movies
     }
 
-    fun generateDummyTvShows(): List<TvShow> {
-        val tvShows = ArrayList<TvShow>()
+    fun generateDummyTvShows(): List<TvShowEntity> {
+        val tvShows = ArrayList<TvShowEntity>()
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 id = 88396,
                 name = "The Falcon and the Winter Soldier",
                 desc = "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
@@ -204,13 +206,12 @@ object DataDummy {
                 backdrop = "https://image.tmdb.org/t/p/original/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
                 date = "2021-03-19",
                 popularity = 7013.338,
-                rating = 7.9,
-                season = generateDummySeasons()
+                rating = 7.9
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 71712,
                 name = "The Good Doctor",
                 desc = "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives",
@@ -219,12 +220,11 @@ object DataDummy {
                 date = "2017-09-25",
                 popularity = 1881.58,
                 rating = 8.6,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 60735,
                 name = "The Flash",
                 desc = "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
@@ -233,12 +233,11 @@ object DataDummy {
                 date = "2014-10-07",
                 popularity = 1308.643,
                 rating = 7.7,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 95557,
                 name = "Invincible",
                 desc = "Mark Grayson is a normal teenager except for the fact that his father is the most powerful superhero on the planet. Shortly after his seventeenth birthday, Mark begins to develop powers of his own and enters into his father’s tutelage.",
@@ -247,12 +246,11 @@ object DataDummy {
                 date = "2021-03-26",
                 popularity = 1313.434,
                 rating = 8.9,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 69050,
                 name = "Riverdale",
                 desc = "Set in the present, the series offers a bold, subversive take on Archie, Betty, Veronica and their friends, exploring the surreality of small-town life, the darkness and weirdness bubbling beneath Riverdale’s wholesome facade.",
@@ -260,13 +258,12 @@ object DataDummy {
                 backdrop = "https://image.tmdb.org/t/p/original/qZtAf4Z1lazGQoYVXiHOrvLr5lI.jpg",
                 date = "2017-01-26",
                 popularity = 983.102,
-                rating = 8.6,
-                season = null
+                rating = 8.6
             )
         )
 
         tvShows.add(
-             TvShow(
+                TvShowEntity(
                 id = 1416,
                 name = "Grey's Anatomy",
                 desc = "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
@@ -275,12 +272,11 @@ object DataDummy {
                 date = "2005-03-27",
                 popularity = 994.98,
                 rating = 8.2,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 18165,
                 name = "The Vampire Diaries",
                 desc = "The story of two vampire brothers obsessed with the same girl, who bears a striking resemblance to the beautiful but ruthless vampire they knew and loved in 1864.",
@@ -289,12 +285,11 @@ object DataDummy {
                 date = "2009-09-10",
                 popularity = 407.362,
                 rating = 8.3,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 77169,
                 name = "Cobra Kai",
                 desc = "This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.",
@@ -303,12 +298,11 @@ object DataDummy {
                 date = "2018-05-02",
                 popularity = 455.645,
                 rating = 8.1,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 1399,
                 name = "Game of Thrones",
                 desc = "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
@@ -317,12 +311,11 @@ object DataDummy {
                 date = "2011-04-17",
                 popularity = 514.834,
                 rating = 8.4,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 71694,
                 name = "Snowfall",
                 desc = "Los Angeles. 1983. A storm is coming and it's name is crack. Set against the infancy of the crack cocaine epidemic and its ultimate radical impact on the culture as we know it, the story follows numerous characters on a violent collision course.",
@@ -331,13 +324,12 @@ object DataDummy {
                 date = "2017-07-05",
                 popularity = 662.338,
                 rating = 8.1,
-                season = null
             )
         )
 
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 1402,
                 name =  "The Walking Dead",
                 desc = "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.",
@@ -346,12 +338,11 @@ object DataDummy {
                 date = "2010-10-31",
                 popularity = 755.255,
                 rating = 8.1,
-                season = null
             )
         )
 
         tvShows.add(
-            TvShow(
+                TvShowEntity(
                 id = 85271,
                 name =  "WandaVision",
                 desc = "Wanda Maximoff and Vision—two super-powered beings living idealized suburban lives—begin to suspect that everything is not as it seems.",
@@ -360,15 +351,14 @@ object DataDummy {
                 date = "2021-01-15",
                 popularity = 730.166,
                 rating = 8.4,
-                season = null
             )
         )
 
         return tvShows
     }
 
-    fun generateDummyMovie(): Movie {
-        return Movie(
+    fun generateDummyMovie(): MovieEntity {
+        return MovieEntity(
                 id = 399566,
                 name =  "Godzilla vs. Kong",
                 desc = "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
@@ -380,8 +370,8 @@ object DataDummy {
         )
     }
 
-    fun generateDummyTvShow(): TvShow {
-        return TvShow(
+    fun generateDummyTvShow(): TvShowEntity {
+        return TvShowEntity(
                 id = 88396,
                 name = "The Falcon and the Winter Soldier",
                 desc = "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
@@ -390,7 +380,6 @@ object DataDummy {
                 date = "2021-03-19",
                 popularity = 7013.338,
                 rating = 7.9,
-                season = null
         )
     }
 
@@ -416,4 +405,19 @@ object DataDummy {
         ))
         return seasons
     }
+
+
+//    fun generateRemoteDummyContent(moduleId: String): ContentResponse =
+//        ContentResponse(moduleId, "This is a dummy content")
+//    fun generateDummyCourseWithModules(course: CourseEntity, bookmarked: Boolean): CourseWithModule {
+//        course.bookmarked = bookmarked
+//        return CourseWithModule(course, generateDummyModules(course.courseId))
+//    }
+//    fun generateDummyContent(moduleId: String): ContentEntity =
+//        ContentEntity("This is a dummy content")
+//    fun generateDummyModuleWithContent(courseId: String): ModuleEntity {
+//        val moduleEntity = generateDummyModules(courseId)[0]
+//        moduleEntity.contentEntity = generateDummyContent(moduleEntity.moduleId)
+//        return moduleEntity
+//    }
 }

@@ -3,9 +3,10 @@ package com.example.moviecatalogue.ui.home.movie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.source.CatalogueRepository
+import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.utils.DataDummy
+import com.example.moviecatalogue.vo.Resource
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -29,7 +30,7 @@ class MovieViewModelTest {
     private lateinit var catalogueRepository: CatalogueRepository
 
     @Mock
-    private lateinit var observer: Observer<List<Movie>>
+    private lateinit var observer: Observer<Resource<List<MovieEntity>>>
 
     @Before
     fun setUp() {
@@ -38,12 +39,12 @@ class MovieViewModelTest {
 
     @Test
     fun getMovies() {
-        val dummyMovies = DataDummy.generateDummyMovies()
-        val movies = MutableLiveData<List<Movie>>()
+        val dummyMovies = Resource.success(DataDummy.generateDummyMovies())
+        val movies = MutableLiveData<Resource<List<MovieEntity>>>()
         movies.value = dummyMovies
 
         `when`(catalogueRepository.getMovies(1)).thenReturn(movies)
-        val movieEntities = viewModel.getMovies().value
+        val movieEntities = viewModel.getMovies().value?.data
         verify(catalogueRepository).getMovies(1)
         assertNotNull(movieEntities)
         assertEquals(14, movieEntities?.size)
