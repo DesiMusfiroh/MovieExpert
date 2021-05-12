@@ -1,32 +1,30 @@
 package com.example.moviecatalogue.ui.home.movie
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.databinding.ItemsCatalogueBinding
+import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-    private var listMovies = ArrayList<MovieEntity>()
-    private lateinit var onItemClickCallback: OnItemClickCallback
+class MovieAdapter  : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(DIFF_CALLBACK_MOVIE) {
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: MovieEntity)
-    }
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
-    fun setMovies(movies: List<MovieEntity>?) {
-        if (movies == null) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movies)
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK_MOVIE = object : DiffUtil.ItemCallback<MovieEntity>() {
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -34,14 +32,10 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         return MovieViewHolder(itemsCatalogueBinding)
     }
 
-    override fun getItemCount(): Int = listMovies.size
-
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = listMovies[position]
-        holder.bind(movie)
-        holder.itemView.setOnClickListener {
-            @Suppress("DEPRECATION")
-            onItemClickCallback.onItemClicked(listMovies[holder.adapterPosition])
+        val movie: MovieEntity? = getItem(position)
+        if (movie != null) {
+            holder.bind(movie)
         }
     }
 
@@ -57,6 +51,12 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                          RequestOptions.placeholderOf(R.drawable.ic_loading)
                               .error(R.drawable.ic_error))
                     .into(imgPoster)
+
+                itemView.setOnClickListener {
+                    val intent =  Intent(itemView.context, DetailMovieActivity::class.java)
+                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.id)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }

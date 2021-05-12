@@ -1,32 +1,31 @@
 package com.example.moviecatalogue.ui.home.tvshow
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.ItemsCatalogueBinding
+import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
+import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
 
-class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
-    private var listTvShows = ArrayList<TvShowEntity>()
-    private lateinit var onItemClickCallback: OnItemClickCallback
+class TvShowAdapter  : PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(TvShowAdapter.DIFF_CALLBACK_TV_SHOW) {
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: TvShowEntity)
-    }
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
-    fun setTvShows(tvShows: List<TvShowEntity>?) {
-        if (tvShows == null) return
-        this.listTvShows.clear()
-        this.listTvShows.addAll(tvShows)
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK_TV_SHOW = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
@@ -34,14 +33,10 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         return TvShowViewHolder(itemsCatalogueBinding)
     }
 
-    override fun getItemCount(): Int = listTvShows.size
-
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        val tvShow = listTvShows[position]
-        holder.bind(tvShow)
-        holder.itemView.setOnClickListener {
-            @Suppress("DEPRECATION")
-            onItemClickCallback.onItemClicked(listTvShows[holder.adapterPosition])
+        val tvShow: TvShowEntity? = getItem(position)
+        if (tvShow != null) {
+            holder.bind(tvShow)
         }
     }
 
@@ -57,6 +52,12 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                          RequestOptions.placeholderOf(R.drawable.ic_loading)
                          .error(R.drawable.ic_error))
                     .into(imgPoster)
+
+                itemView.setOnClickListener {
+                    val intent =  Intent(itemView.context, DetailTvShowActivity::class.java)
+                    intent.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, tvShow.id)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }

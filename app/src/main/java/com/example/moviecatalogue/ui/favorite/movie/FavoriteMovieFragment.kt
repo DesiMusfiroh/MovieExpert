@@ -1,6 +1,5 @@
 package com.example.moviecatalogue.ui.favorite.movie
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.databinding.FragmentMovieBinding
-import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.ui.home.movie.MovieAdapter
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
 
@@ -31,18 +28,9 @@ class FavoriteMovieFragment : Fragment() {
 
             val adapter = MovieAdapter()
 
-            adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: MovieEntity) {
-                    Intent(activity, DetailMovieActivity::class.java).also {
-                        it.putExtra(DetailMovieActivity.EXTRA_MOVIE, data.id)
-                        startActivity(it)
-                    }
-                }
-            })
-
             fragmentMovieBinding.apply {
                 rvMovie.layoutManager = GridLayoutManager(context, 3)
-                rvMovie.setHasFixedSize(true)
+                rvMovie.setHasFixedSize(false)
                 rvMovie.adapter = adapter
             }
 
@@ -50,7 +38,7 @@ class FavoriteMovieFragment : Fragment() {
             viewModel.getFavoriteMovies().observe(viewLifecycleOwner, {
                 Log.d("favorite", "fragment $it")
                 fragmentMovieBinding.progressBar.visibility = View.GONE
-                adapter.setMovies(it)
+                adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             })
         }

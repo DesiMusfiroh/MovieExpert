@@ -1,6 +1,5 @@
 package com.example.moviecatalogue.ui.home.tvshow
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.FragmentTvShowBinding
-import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
 import com.example.moviecatalogue.vo.Status
 
@@ -38,7 +35,7 @@ class TvShowFragment : Fragment() {
                         Status.LOADING -> fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
                         Status.SUCCESS -> {
                             fragmentTvShowBinding.progressBar.visibility = View.GONE
-                            tvShowAdapter.setTvShows(tvShows.data)
+                            tvShowAdapter.submitList(tvShows.data)
                             tvShowAdapter.notifyDataSetChanged()
                         }
                         Status.ERROR -> {
@@ -49,19 +46,9 @@ class TvShowFragment : Fragment() {
                 }
             })
 
-
-            tvShowAdapter.setOnItemClickCallback(object : TvShowAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: TvShowEntity) {
-                    Intent(activity, DetailTvShowActivity::class.java).also {
-                        it.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, data.id)
-                        startActivity(it)
-                    }
-                }
-            })
-
             with(fragmentTvShowBinding.rvTvshow) {
                 layoutManager = GridLayoutManager(context, 3)
-                setHasFixedSize(true)
+                setHasFixedSize(false)
                 adapter = tvShowAdapter
             }
         }
