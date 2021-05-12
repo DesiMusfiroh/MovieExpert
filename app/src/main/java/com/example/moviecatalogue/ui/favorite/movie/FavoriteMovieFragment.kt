@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviecatalogue.databinding.FragmentMovieBinding
-import com.example.moviecatalogue.ui.home.movie.MovieAdapter
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
 
 class FavoriteMovieFragment : Fragment() {
@@ -26,10 +26,10 @@ class FavoriteMovieFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[FavoriteMovieViewModel::class.java]
 
-            val adapter = MovieAdapter()
+            val adapter = FavoriteMovieAdapter()
 
             fragmentMovieBinding.apply {
-                rvMovie.layoutManager = GridLayoutManager(context, 3)
+                rvMovie.layoutManager = LinearLayoutManager(context)
                 rvMovie.setHasFixedSize(false)
                 rvMovie.adapter = adapter
             }

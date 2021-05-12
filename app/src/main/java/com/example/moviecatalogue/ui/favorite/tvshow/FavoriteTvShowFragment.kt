@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviecatalogue.databinding.FragmentTvShowBinding
-import com.example.moviecatalogue.ui.home.tvshow.TvShowAdapter
 import com.example.moviecatalogue.viewmodel.ViewModelFactory
 
 class FavoriteTvShowFragment : Fragment() {
@@ -25,10 +25,10 @@ class FavoriteTvShowFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[FavoriteTvShowViewModel::class.java]
 
-            val adapter = TvShowAdapter()
+            val adapter = FavoriteTvShowAdapter()
 
             fragmentTvShowBinding.apply {
-                rvTvshow.layoutManager = GridLayoutManager(context, 3)
+                rvTvshow.layoutManager = LinearLayoutManager(context)
                 rvTvshow.setHasFixedSize(false)
                 rvTvshow.adapter = adapter
             }
