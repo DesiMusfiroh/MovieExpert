@@ -54,7 +54,7 @@ class TvShowViewModelTest {
         val tvShowsEntities = viewModel.getTvShows().value?.data
         verify(catalogueRepository).getTvShows(1)
         assertNotNull(tvShowsEntities)
-        assertEquals(12, tvShowsEntities?.size)
+        assertEquals(5, tvShowsEntities?.size)
 
         viewModel.getTvShows().observeForever(observer)
         verify(observer).onChanged(dummyTvShows)

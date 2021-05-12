@@ -52,7 +52,7 @@ class MovieViewModelTest {
         val movieEntities = viewModel.getMovies().value?.data
         verify(catalogueRepository).getMovies(1)
         assertNotNull(movieEntities)
-        assertEquals(14, movieEntities?.size)
+        assertEquals(5, movieEntities?.size)
 
         viewModel.getMovies().observeForever(observer)
         verify(observer).onChanged(dummyMovies)
