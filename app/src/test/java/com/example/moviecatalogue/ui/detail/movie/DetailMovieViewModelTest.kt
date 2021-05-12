@@ -4,12 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.moviecatalogue.vo.Resource
-import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.source.CatalogueRepository
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.utils.DataDummy
 import org.junit.Test
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith

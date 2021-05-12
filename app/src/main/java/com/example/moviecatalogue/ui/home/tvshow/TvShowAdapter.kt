@@ -11,11 +11,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.databinding.ItemsCatalogueBinding
-import com.example.moviecatalogue.ui.detail.movie.DetailMovieActivity
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowActivity
 import com.example.moviecatalogue.utils.Constants.POSTER_URL
 
-class TvShowAdapter  : PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(TvShowAdapter.DIFF_CALLBACK_TV_SHOW) {
+class TvShowAdapter  : PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK_TV_SHOW) {
 
     companion object {
         private val DIFF_CALLBACK_TV_SHOW = object : DiffUtil.ItemCallback<TvShowEntity>() {
