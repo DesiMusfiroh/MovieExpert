@@ -21,9 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.detail.tvshow.DetailTvShowActivity"  android:parentActivityName=".ui.home.HomeActivity"/>
-        <activity android:name=".ui.detail.movie.DetailMovieActivity" android:parentActivityName=".ui.home.HomeActivity"/>
-        <activity android:name=".ui.home.HomeActivity" />
+        <activity android:name=".ui.detail.tvshow.DetailTvShowActivity" android:parentActivityName=".ui.MainActivity"/>
+        <activity android:name=".ui.detail.movie.DetailMovieActivity" android:parentActivityName=".ui.MainActivity"/>
     </application>
 
 </manifest>

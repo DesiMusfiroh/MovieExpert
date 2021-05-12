@@ -1,6 +1,5 @@
 package com.example.moviecatalogue.data.source.local.entity
 
-
 import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

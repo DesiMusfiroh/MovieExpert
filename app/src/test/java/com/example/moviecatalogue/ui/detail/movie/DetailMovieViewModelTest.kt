@@ -57,7 +57,6 @@ class DetailMovieViewModelTest {
         movie.value = dummyMovie
 
         `when`(catalogueRepository.getMovie(movieId!!)).thenReturn(movie)
-
         viewModel.getMovie.observeForever(observer)
         verify(observer).onChanged(dummyMovie)
         viewModel.setFavorite()

@@ -4,11 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.CatalogueRepository
-import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
-import com.example.moviecatalogue.utils.DataDummy
 import com.example.moviecatalogue.vo.Resource
 import org.junit.Test
 import org.junit.Assert.*

@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import com.example.moviecatalogue.R
 import com.example.moviecatalogue.ui.MainActivity
-import com.example.moviecatalogue.ui.home.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

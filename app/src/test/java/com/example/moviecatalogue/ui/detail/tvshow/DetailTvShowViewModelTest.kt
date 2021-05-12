@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.moviecatalogue.data.source.CatalogueRepository
-import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.moviecatalogue.utils.DataDummy
 import com.example.moviecatalogue.vo.Resource
@@ -58,10 +57,8 @@ class DetailTvShowViewModelTest {
         tvShow.value = dummyTvShow
 
         `when`(catalogueRepository.getTvShow(tvShowId!!)).thenReturn(tvShow)
-
         viewModel.getTvShow.observeForever(observer)
         verify(observer).onChanged(dummyTvShow)
-
         viewModel.setFavorite()
         verify(catalogueRepository).setTvShowFavorite(tvShow.value!!.data as TvShowEntity, true)
         verifyNoMoreInteractions(observer)
