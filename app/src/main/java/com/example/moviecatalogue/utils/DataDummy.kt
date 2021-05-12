@@ -1,8 +1,6 @@
 package com.example.moviecatalogue.utils
 
-import com.example.moviecatalogue.data.model.Movie
 import com.example.moviecatalogue.data.model.Season
-import com.example.moviecatalogue.data.model.TvShow
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 
@@ -406,18 +404,4 @@ object DataDummy {
         return seasons
     }
 
-
-//    fun generateRemoteDummyContent(moduleId: String): ContentResponse =
-//        ContentResponse(moduleId, "This is a dummy content")
-//    fun generateDummyCourseWithModules(course: CourseEntity, bookmarked: Boolean): CourseWithModule {
-//        course.bookmarked = bookmarked
-//        return CourseWithModule(course, generateDummyModules(course.courseId))
-//    }
-//    fun generateDummyContent(moduleId: String): ContentEntity =
-//        ContentEntity("This is a dummy content")
-//    fun generateDummyModuleWithContent(courseId: String): ModuleEntity {
-//        val moduleEntity = generateDummyModules(courseId)[0]
-//        moduleEntity.contentEntity = generateDummyContent(moduleEntity.moduleId)
-//        return moduleEntity
-//    }
 }

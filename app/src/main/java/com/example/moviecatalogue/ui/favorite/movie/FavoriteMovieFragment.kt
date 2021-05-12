@@ -24,7 +24,6 @@ class FavoriteMovieFragment : Fragment() {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[FavoriteMovieViewModel::class.java]
-
             val adapter = FavoriteMovieAdapter()
 
             fragmentMovieBinding.apply {

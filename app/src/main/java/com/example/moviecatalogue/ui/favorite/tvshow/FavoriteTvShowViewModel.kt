@@ -8,7 +8,5 @@ import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
 
 class FavoriteTvShowViewModel (private val catalogueRepository: CatalogueRepository) : ViewModel() {
     @Suppress("DEPRECATION")
-    fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>> {
-        return catalogueRepository.getFavoriteTvShows()
-    }
+    fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>> = catalogueRepository.getFavoriteTvShows()
 }

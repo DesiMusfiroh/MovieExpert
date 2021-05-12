@@ -158,8 +158,6 @@ class CatalogueRepository private constructor(
     override fun setTvShowFavorite(tvShow: TvShowEntity, state: Boolean) =
             appExecutors.diskIO().execute { localDataSource.setTvShowFavorite(tvShow, state) }
 
-    override fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>> {
-        return remoteDataSource.getSeasonsByTvShow(tvShowId)
-    }
+    override fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>> = remoteDataSource.getSeasonsByTvShow(tvShowId)
 
 }

@@ -23,7 +23,6 @@ class FavoriteTvShowFragment : Fragment() {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[FavoriteTvShowViewModel::class.java]
-
             val adapter = FavoriteTvShowAdapter()
 
             fragmentTvShowBinding.apply {

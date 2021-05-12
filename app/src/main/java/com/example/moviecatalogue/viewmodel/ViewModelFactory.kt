@@ -8,7 +8,6 @@ import com.example.moviecatalogue.di.Injection
 import com.example.moviecatalogue.ui.detail.movie.DetailMovieViewModel
 import com.example.moviecatalogue.ui.detail.tvshow.DetailTvShowViewModel
 import com.example.moviecatalogue.ui.favorite.movie.FavoriteMovieViewModel
-import com.example.moviecatalogue.ui.favorite.tvshow.FavoriteTvShowFragment
 import com.example.moviecatalogue.ui.favorite.tvshow.FavoriteTvShowViewModel
 import com.example.moviecatalogue.ui.home.movie.MovieViewModel
 import com.example.moviecatalogue.ui.home.tvshow.TvShowViewModel

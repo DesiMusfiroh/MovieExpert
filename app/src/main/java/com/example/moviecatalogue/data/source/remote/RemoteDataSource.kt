@@ -69,7 +69,6 @@ class RemoteDataSource {
     }
 
     fun getMovie(id: Int): LiveData<ApiResponse<Movie>> {
-
         val movie = MutableLiveData<ApiResponse<Movie>>()
         val client = ApiConfig.getApiService().getMovie(id)
         EspressoIdlingResource.increment()
@@ -92,7 +91,6 @@ class RemoteDataSource {
     }
 
     fun getTvShow(id: Int) : LiveData<ApiResponse<TvShow>>{
-
         val tvShow = MutableLiveData<ApiResponse<TvShow>>()
         val client = ApiConfig.getApiService().getTvShow(id)
         EspressoIdlingResource.increment()
@@ -117,7 +115,6 @@ class RemoteDataSource {
 
     fun getSeasonsByTvShow(id: Int) : LiveData<List<Season>>{
         val seasonsByTvShow: MutableLiveData<List<Season>> = MutableLiveData()
-        val tvShow = MutableLiveData<TvShow>()
         val client = ApiConfig.getApiService().getTvShow(id)
         EspressoIdlingResource.increment()
 
