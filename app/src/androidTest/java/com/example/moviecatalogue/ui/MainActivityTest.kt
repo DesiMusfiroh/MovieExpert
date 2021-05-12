@@ -6,6 +6,7 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.pressBack
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -90,7 +91,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         onView(withId(R.id.tv_name)).check(matches(isDisplayed()))
         onView(withId(R.id.action_favorite)).perform(ViewActions.click())
-        onView(isRoot()).perform(ViewActions.pressBack())
+        onView(isRoot()).perform(pressBack())
     }
 
     @Test
@@ -101,6 +102,6 @@ class MainActivityTest {
         onView(withId(R.id.rv_tvshow)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         onView(withId(R.id.tv_name)).check(matches(isDisplayed()))
         onView(withId(R.id.action_favorite)).perform(ViewActions.click())
-        onView(isRoot()).perform(ViewActions.pressBack())
+        onView(isRoot()).perform(pressBack())
     }
 }

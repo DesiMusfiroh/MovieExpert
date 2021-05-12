@@ -7,6 +7,7 @@ import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.source.local.LocalDataSource
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
+import com.example.moviecatalogue.data.source.local.room.CatalogueDao
 import com.example.moviecatalogue.data.source.remote.RemoteDataSource
 import com.example.moviecatalogue.utils.AppExecutors
 import com.example.moviecatalogue.utils.DataDummy
@@ -17,6 +18,7 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.*
+import java.util.concurrent.Executors
 
 class CatalogueRepositoryTest {
 
@@ -26,7 +28,7 @@ class CatalogueRepositoryTest {
     private val remote = mock(RemoteDataSource::class.java)
     private val local = mock(LocalDataSource::class.java)
     private val appExecutors = mock(AppExecutors::class.java)
-
+    private val dao = mock(CatalogueDao::class.java)
     private val catalogueRepository = FakeCatalogueRepository(remote, local, appExecutors)
 
     private val movieResponses = DataDummy.generateDummyMovies()
@@ -108,6 +110,31 @@ class CatalogueRepositoryTest {
         assertNotNull(tvShowEntities)
         assertEquals(tvShowResponses.size.toLong(), tvShowEntities.data?.size?.toLong())
     }
+
+    @Test
+    fun setMovieFavorite() {
+        val localData = LocalDataSource.getInstance(dao)
+        val dataDummy = DataDummy.generateDummyMovies()[0]
+        val expectedDataDummy = dataDummy.copy(favorited = true)
+
+        doNothing().`when`(dao).updateMovie(expectedDataDummy)
+        localData.setMovieFavorite(dataDummy, true)
+        verify(dao, times(1)).updateMovie(expectedDataDummy)
+    }
+
+    @Test
+    fun setTvShowFavorite() {
+        val dataDummy = DataDummy.generateDummyTvShows()[0]
+        val newState = !dataDummy.favorited
+
+        `when`(appExecutors.diskIO()).thenReturn(Executors.newSingleThreadExecutor())
+        local.setTvShowFavorite(dataDummy, newState)
+
+        catalogueRepository.setTvShowFavorite(dataDummy, newState)
+        verify(local, times(1)).setTvShowFavorite(dataDummy, newState)
+        verifyNoMoreInteractions(local)
+    }
+
 
     @Test
     fun getSeasonsByTvShow() {

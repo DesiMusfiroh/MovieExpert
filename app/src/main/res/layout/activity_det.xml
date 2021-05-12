@@ -227,8 +227,10 @@
         app:fabSize="normal"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="end|bottom"
-        android:layout_marginRight="30dp"
-        android:backgroundTint="#facf5a">
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#facf5a"
+        android:focusable="true"
+        android:contentDescription="@string/title_favorite">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
