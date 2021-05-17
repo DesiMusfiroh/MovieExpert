@@ -7,7 +7,6 @@ import com.example.moviecatalogue.data.model.Season
 import com.example.moviecatalogue.data.source.local.LocalDataSource
 import com.example.moviecatalogue.data.source.local.entity.MovieEntity
 import com.example.moviecatalogue.data.source.local.entity.TvShowEntity
-import com.example.moviecatalogue.data.source.local.room.CatalogueDao
 import com.example.moviecatalogue.data.source.remote.RemoteDataSource
 import com.example.moviecatalogue.utils.AppExecutors
 import com.example.moviecatalogue.utils.DataDummy
@@ -28,7 +27,6 @@ class CatalogueRepositoryTest {
     private val remote = mock(RemoteDataSource::class.java)
     private val local = mock(LocalDataSource::class.java)
     private val appExecutors = mock(AppExecutors::class.java)
-    private val dao = mock(CatalogueDao::class.java)
     private val catalogueRepository = FakeCatalogueRepository(remote, local, appExecutors)
 
     private val movieResponses = DataDummy.generateDummyMovies()
@@ -113,13 +111,15 @@ class CatalogueRepositoryTest {
 
     @Test
     fun setMovieFavorite() {
-        val localData = LocalDataSource.getInstance(dao)
         val dataDummy = DataDummy.generateDummyMovies()[0]
-        val expectedDataDummy = dataDummy.copy(favorited = true)
+        val newState = !dataDummy.favorited
 
-        doNothing().`when`(dao).updateMovie(expectedDataDummy)
-        localData.setMovieFavorite(dataDummy, true)
-        verify(dao, times(1)).updateMovie(expectedDataDummy)
+        `when`(appExecutors.diskIO()).thenReturn(Executors.newSingleThreadExecutor())
+        local.setMovieFavorite(dataDummy, newState)
+
+        catalogueRepository.setMovieFavorite(dataDummy, newState)
+        verify(local, times(1)).setMovieFavorite(dataDummy, newState)
+        verifyNoMoreInteractions(local)
     }
 
     @Test
