@@ -1,7 +1,7 @@
 package com.made.movieexpert.api
 
-import com.made.movieexpert.data.model.Movie
-import com.made.movieexpert.data.model.TvShow
+import com.made.movieexpert.data.model.MovieRes
+import com.made.movieexpert.data.model.TvShowRes
 import com.made.movieexpert.data.source.remote.response.MovieResponse
 import com.made.movieexpert.data.source.remote.response.TvShowResponse
 import com.made.movieexpert.utils.Constants.API_KEY
@@ -23,11 +23,11 @@ interface ApiService {
     @GET("movie/{id}?api_key=$API_KEY")
     fun getMovie(
         @Path("id") id: Int
-    ) : Call<Movie>
+    ) : Call<MovieRes>
 
     @GET("tv/{id}?api_key=$API_KEY")
     fun getTvShow(
         @Path("id") id: Int
-    ) : Call<TvShow>
+    ) : Call<TvShowRes>
 
 }

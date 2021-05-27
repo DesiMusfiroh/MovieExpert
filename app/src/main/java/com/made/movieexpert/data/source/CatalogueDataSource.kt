@@ -4,7 +4,7 @@ package com.made.movieexpert.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import com.made.movieexpert.data.model.Season
+import com.made.movieexpert.data.model.SeasonRes
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
 import com.made.movieexpert.vo.Resource
@@ -20,5 +20,5 @@ interface CatalogueDataSource {
     fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>>
     fun setTvShowFavorite(tvShow: TvShowEntity, state: Boolean)
 
-    fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<Season>>
+    fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<SeasonRes>>
 }

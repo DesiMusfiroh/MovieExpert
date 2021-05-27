@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class TvShow(
+data class TvShowRes(
     @field:SerializedName("id")
     val id: Int,
 
@@ -31,29 +31,5 @@ data class TvShow(
     val rating: Double,
 
     @field:SerializedName("seasons")
-    val season: List<Season>?
-) : Parcelable
-
-@Parcelize
-data class Season(
-    @field:SerializedName("id")
-    val id: Int,
-
-    @field:SerializedName("season_number")
-    val number: Int,
-
-    @field:SerializedName("name")
-    val name: String,
-
-    @field:SerializedName("air_date")
-    val date: String,
-
-    @field:SerializedName("overview")
-    val desc: String,
-
-    @field:SerializedName("poster_path")
-    val poster: String,
-
-    @field:SerializedName("episode_count")
-    val episode: Int
+    val season: List<SeasonRes>?
 ) : Parcelable

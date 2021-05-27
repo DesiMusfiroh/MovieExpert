@@ -1,6 +1,6 @@
 package com.made.movieexpert.utils
 
-import com.made.movieexpert.data.model.Season
+import com.made.movieexpert.data.model.SeasonRes
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
 
@@ -381,9 +381,9 @@ object DataDummy {
         )
     }
 
-    fun generateDummySeasons(): List<Season> {
-        val seasons = ArrayList<Season>()
-        seasons.add(Season(
+    fun generateDummySeasons(): List<SeasonRes> {
+        val seasons = ArrayList<SeasonRes>()
+        seasons.add(SeasonRes(
                 id = 3627,
                 number = 1,
                 name = "Season 1",
@@ -392,7 +392,7 @@ object DataDummy {
                 poster = "/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg",
                 episode = 10
         ))
-        seasons.add(Season(
+        seasons.add(SeasonRes(
                 id = 3627,
                 number = 2,
                 name = "Season 2",
