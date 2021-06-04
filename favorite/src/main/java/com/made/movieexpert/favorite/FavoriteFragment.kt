@@ -1,11 +1,12 @@
-package com.made.movieexpert.ui.favorite
+package com.made.movieexpert.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.made.movieexpert.databinding.FragmentFavoriteBinding
+import com.made.movieexpert.favorite.databinding.FragmentFavoriteBinding
+import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment() {
 
@@ -23,5 +24,6 @@ class FavoriteFragment : Fragment() {
             viewPager.adapter = sectionsPagerAdapter
             tabs.setupWithViewPager(viewPager)
         }
+        loadKoinModules(favoriteModule)
     }
 }

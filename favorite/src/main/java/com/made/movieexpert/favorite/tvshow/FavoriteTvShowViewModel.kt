@@ -1,4 +1,4 @@
-package com.made.movieexpert.ui.favorite.tvshow
+package com.made.movieexpert.favorite.tvshow
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

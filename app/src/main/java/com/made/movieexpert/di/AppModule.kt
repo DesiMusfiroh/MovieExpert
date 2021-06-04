@@ -4,8 +4,6 @@ import com.made.movieexpert.core.domain.usecase.CatalogueInteractor
 import com.made.movieexpert.core.domain.usecase.CatalogueUseCase
 import com.made.movieexpert.ui.detail.movie.DetailMovieViewModel
 import com.made.movieexpert.ui.detail.tvshow.DetailTvShowViewModel
-import com.made.movieexpert.ui.favorite.movie.FavoriteMovieViewModel
-import com.made.movieexpert.ui.favorite.tvshow.FavoriteTvShowViewModel
 import com.made.movieexpert.ui.home.movie.MovieViewModel
 import com.made.movieexpert.ui.home.tvshow.TvShowViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -20,6 +18,4 @@ val viewModelModule = module {
     viewModel { TvShowViewModel(get()) }
     viewModel { DetailMovieViewModel(get()) }
     viewModel { DetailTvShowViewModel(get()) }
-    viewModel { FavoriteMovieViewModel(get()) }
-    viewModel { FavoriteTvShowViewModel(get()) }
 }

@@ -1,4 +1,4 @@
-package com.made.movieexpert.ui.favorite.movie
+package com.made.movieexpert.favorite.movie
 
 import android.content.Intent
 import android.os.Bundle

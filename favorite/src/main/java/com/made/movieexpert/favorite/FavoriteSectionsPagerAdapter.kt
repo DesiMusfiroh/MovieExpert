@@ -1,13 +1,14 @@
-package com.made.movieexpert.ui.favorite
+package com.made.movieexpert.favorite
 
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.made.movieexpert.R
-import com.made.movieexpert.ui.favorite.movie.FavoriteMovieFragment
-import com.made.movieexpert.ui.favorite.tvshow.FavoriteTvShowFragment
+import com.made.movieexpert.favorite.movie.FavoriteMovieFragment
+import com.made.movieexpert.favorite.tvshow.FavoriteTvShowFragment
 
+@Suppress("DEPRECATION")
 class FavoriteSectionsPagerAdapter (private val mContext: FavoriteFragment, fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
