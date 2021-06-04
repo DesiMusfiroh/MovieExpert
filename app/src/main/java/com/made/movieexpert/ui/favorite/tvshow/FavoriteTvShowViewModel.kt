@@ -2,11 +2,9 @@ package com.made.movieexpert.ui.favorite.tvshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagedList
-import com.made.movieexpert.data.source.CatalogueRepository
-import com.made.movieexpert.data.source.local.entity.TvShowEntity
+import com.made.movieexpert.domain.model.TvShow
+import com.made.movieexpert.domain.usecase.CatalogueUseCase
 
-class FavoriteTvShowViewModel (private val catalogueRepository: CatalogueRepository) : ViewModel() {
-    @Suppress("DEPRECATION")
-    fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>> = catalogueRepository.getFavoriteTvShows()
+class FavoriteTvShowViewModel (private val catalogueUseCase: CatalogueUseCase) : ViewModel() {
+    fun getFavoriteTvShows(): LiveData<List<TvShow>> = catalogueUseCase.getFavoriteTvShows()
 }

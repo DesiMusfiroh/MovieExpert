@@ -1,6 +1,6 @@
 package com.made.movieexpert.utils
 
-import com.made.movieexpert.data.model.SeasonRes
+import com.made.movieexpert.data.source.remote.model.SeasonRes
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
 

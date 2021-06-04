@@ -21,7 +21,7 @@ abstract class CatalogueDatabase : RoomDatabase(){
                 Room.databaseBuilder(
                     context.applicationContext,
                     CatalogueDatabase::class.java,
-                    "Academies.db"
+                    "MovieExpert.db"
                 ).build().apply {
                     INSTANCE = this
                 }

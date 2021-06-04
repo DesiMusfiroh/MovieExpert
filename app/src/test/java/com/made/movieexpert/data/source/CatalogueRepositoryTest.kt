@@ -3,7 +3,7 @@ package com.made.movieexpert.data.source
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
-import com.made.movieexpert.data.model.SeasonRes
+import com.made.movieexpert.data.source.remote.model.SeasonRes
 import com.made.movieexpert.data.source.local.LocalDataSource
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.made.movieexpert.api.ApiResponse
-import com.made.movieexpert.data.model.SeasonRes
+import com.made.movieexpert.data.source.remote.model.SeasonRes
 import com.made.movieexpert.data.source.local.LocalDataSource
 import com.made.movieexpert.data.source.remote.RemoteDataSource
 import com.made.movieexpert.utils.AppExecutors
@@ -17,7 +17,7 @@ class FakeCatalogueRepository constructor(
 ) : CatalogueDataSource {
 
     override fun getMovies(page: Int): LiveData<Resource<PagedList<MovieEntity>>> {
-        return object : NetworkBoundResource<PagedList<MovieEntity>, List<com.made.movieexpert.data.model.MovieRes>>(appExecutors) {
+        return object : NetworkBoundResource<PagedList<MovieEntity>, List<com.made.movieexpert.data.source.remote.model.MovieRes>>(appExecutors) {
             override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
                 val config = PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
@@ -29,9 +29,9 @@ class FakeCatalogueRepository constructor(
 
             override fun shouldFetch(data: PagedList<MovieEntity>?): Boolean = data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<com.made.movieexpert.data.model.MovieRes>>> = remoteDataSource.getMovies(1)
+            override fun createCall(): LiveData<ApiResponse<List<com.made.movieexpert.data.source.remote.model.MovieRes>>> = remoteDataSource.getMovies(1)
 
-            override fun saveCallResult(data: List<com.made.movieexpert.data.model.MovieRes>) {
+            override fun saveCallResult(data: List<com.made.movieexpert.data.source.remote.model.MovieRes>) {
                 val movieList = ArrayList<MovieEntity>()
                 for (response in data) {
                     val movie = MovieEntity(
@@ -53,14 +53,14 @@ class FakeCatalogueRepository constructor(
     }
 
     override fun getMovie(id: Int): LiveData<Resource<MovieEntity>> {
-        return object : NetworkBoundResource<MovieEntity, com.made.movieexpert.data.model.MovieRes>(appExecutors) {
+        return object : NetworkBoundResource<MovieEntity, com.made.movieexpert.data.source.remote.model.MovieRes>(appExecutors) {
             override fun loadFromDB(): LiveData<MovieEntity> = localDataSource.getMovie(id)
 
             override fun shouldFetch(data: MovieEntity?): Boolean = data == null
 
-            override fun createCall(): LiveData<ApiResponse<com.made.movieexpert.data.model.MovieRes>> = remoteDataSource.getMovie(id)
+            override fun createCall(): LiveData<ApiResponse<com.made.movieexpert.data.source.remote.model.MovieRes>> = remoteDataSource.getMovie(id)
 
-            override fun saveCallResult(data: com.made.movieexpert.data.model.MovieRes) {
+            override fun saveCallResult(data: com.made.movieexpert.data.source.remote.model.MovieRes) {
                 localDataSource.getMovie(id)
             }
 
@@ -81,7 +81,7 @@ class FakeCatalogueRepository constructor(
 
 
     override fun getTvShows(page: Int): LiveData<Resource<PagedList<TvShowEntity>>> {
-        return object : NetworkBoundResource<PagedList<TvShowEntity>, List<com.made.movieexpert.data.model.TvShowRes>>(appExecutors) {
+        return object : NetworkBoundResource<PagedList<TvShowEntity>, List<com.made.movieexpert.data.source.remote.model.TvShowRes>>(appExecutors) {
             override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
                 val config = PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
@@ -93,9 +93,9 @@ class FakeCatalogueRepository constructor(
 
             override fun shouldFetch(data: PagedList<TvShowEntity>?): Boolean = data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<com.made.movieexpert.data.model.TvShowRes>>> = remoteDataSource.getTvShows(1)
+            override fun createCall(): LiveData<ApiResponse<List<com.made.movieexpert.data.source.remote.model.TvShowRes>>> = remoteDataSource.getTvShows(1)
 
-            override fun saveCallResult(data: List<com.made.movieexpert.data.model.TvShowRes>) {
+            override fun saveCallResult(data: List<com.made.movieexpert.data.source.remote.model.TvShowRes>) {
                 val tvShowList = ArrayList<TvShowEntity>()
                 for (response in data) {
                     val tvShow = TvShowEntity(
@@ -117,14 +117,14 @@ class FakeCatalogueRepository constructor(
     }
 
     override fun getTvShow(id: Int): LiveData<Resource<TvShowEntity>> {
-        return object : NetworkBoundResource<TvShowEntity, com.made.movieexpert.data.model.TvShowRes>(appExecutors) {
+        return object : NetworkBoundResource<TvShowEntity, com.made.movieexpert.data.source.remote.model.TvShowRes>(appExecutors) {
             override fun loadFromDB(): LiveData<TvShowEntity> = localDataSource.getTvShow(id)
 
             override fun shouldFetch(data: TvShowEntity?): Boolean = data == null
 
-            override fun createCall(): LiveData<ApiResponse<com.made.movieexpert.data.model.TvShowRes>> = remoteDataSource.getTvShow(id)
+            override fun createCall(): LiveData<ApiResponse<com.made.movieexpert.data.source.remote.model.TvShowRes>> = remoteDataSource.getTvShow(id)
 
-            override fun saveCallResult(data: com.made.movieexpert.data.model.TvShowRes) {
+            override fun saveCallResult(data: com.made.movieexpert.data.source.remote.model.TvShowRes) {
                 localDataSource.getTvShow(id)
             }
 

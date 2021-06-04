@@ -9,22 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
-import com.made.movieexpert.data.source.local.entity.TvShowEntity
 import com.made.movieexpert.databinding.ItemsCatalogueFavoriteBinding
+import com.made.movieexpert.domain.model.TvShow
 import com.made.movieexpert.ui.detail.tvshow.DetailTvShowActivity
 import com.made.movieexpert.utils.Constants
 
-class FavoriteTvShowAdapter : PagedListAdapter<TvShowEntity, FavoriteTvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK_TV_SHOW) {
+class FavoriteTvShowAdapter : RecyclerView.Adapter<FavoriteTvShowAdapter.TvShowViewHolder>() {
+    private var listTvShows = ArrayList<TvShow>()
 
-    companion object {
-        private val DIFF_CALLBACK_TV_SHOW = object : DiffUtil.ItemCallback<TvShowEntity>() {
-            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
-                return oldItem.id == newItem.id
-            }
-            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
-                return oldItem == newItem
-            }
-        }
+    fun setTvShows(tvShows: List<TvShow>?) {
+        if (tvShows == null) return
+        this.listTvShows.clear()
+        this.listTvShows.addAll(tvShows)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
@@ -32,15 +29,15 @@ class FavoriteTvShowAdapter : PagedListAdapter<TvShowEntity, FavoriteTvShowAdapt
         return TvShowViewHolder(itemsCatalogueFavoriteBinding)
     }
 
+    override fun getItemCount(): Int = listTvShows.size
+
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        val tvShow: TvShowEntity? = getItem(position)
-        if (tvShow != null) {
-            holder.bind(tvShow)
-        }
+        val tvShow = listTvShows[position]
+        holder.bind(tvShow)
     }
 
     class TvShowViewHolder(private val binding: ItemsCatalogueFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: TvShowEntity) {
+        fun bind(tvShow: TvShow) {
             with(binding) {
                 tvItemName.text = tvShow.name
                 tvItemDesc.text = tvShow.desc
@@ -55,7 +52,7 @@ class FavoriteTvShowAdapter : PagedListAdapter<TvShowEntity, FavoriteTvShowAdapt
 
                 itemView.setOnClickListener {
                     val intent =  Intent(itemView.context, DetailTvShowActivity::class.java)
-                    intent.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, tvShow.id)
+                    intent.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, tvShow)
                     itemView.context.startActivity(intent)
                 }
             }

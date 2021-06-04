@@ -1,7 +1,6 @@
 package com.made.movieexpert.data.source.local
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
 import com.made.movieexpert.data.source.local.room.CatalogueDao
@@ -15,11 +14,11 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
             INSTANCE ?: LocalDataSource(catalogueDao)
     }
 
-    fun getMovies(): DataSource.Factory<Int, MovieEntity> = mCatalogueDao.getMovies()
+    fun getMovies(): LiveData<List<MovieEntity>> = mCatalogueDao.getMovies()
 
     fun getMovie(movieId: Int): LiveData<MovieEntity> = mCatalogueDao.getMovie(movieId)
 
-    fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity> = mCatalogueDao.getFavoriteMovies()
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>> = mCatalogueDao.getFavoriteMovies()
 
     fun insertMovies(movies: List<MovieEntity>) = mCatalogueDao.insertMovies(movies)
 
@@ -28,12 +27,11 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
         mCatalogueDao.updateMovie(movie)
     }
 
-
-    fun getTvShows(): DataSource.Factory<Int, TvShowEntity> = mCatalogueDao.getTvShows()
+    fun getTvShows(): LiveData<List<TvShowEntity>>  = mCatalogueDao.getTvShows()
 
     fun getTvShow(tvShowId: Int): LiveData<TvShowEntity> = mCatalogueDao.getTvShow(tvShowId)
 
-    fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity> = mCatalogueDao.getFavoriteTvShows()
+    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>> = mCatalogueDao.getFavoriteTvShows()
 
     fun insertTvShows(tvShows: List<TvShowEntity>) = mCatalogueDao.insertTvShows(tvShows)
 

@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.made.movieexpert.databinding.FragmentTvShowBinding
+import com.made.movieexpert.domain.model.TvShow
 import com.made.movieexpert.viewmodel.ViewModelFactory
 
 class FavoriteTvShowFragment : Fragment() {
@@ -34,7 +36,7 @@ class FavoriteTvShowFragment : Fragment() {
             fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
             viewModel.getFavoriteTvShows().observe(viewLifecycleOwner, {
                 fragmentTvShowBinding.progressBar.visibility = View.GONE
-                adapter.submitList(it)
+                adapter.setTvShows(it)
                 adapter.notifyDataSetChanged()
             })
         }

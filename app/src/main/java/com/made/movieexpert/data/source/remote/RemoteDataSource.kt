@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.made.movieexpert.api.ApiConfig
 import com.made.movieexpert.api.ApiResponse
-import com.made.movieexpert.data.model.MovieRes
-import com.made.movieexpert.data.model.SeasonRes
-import com.made.movieexpert.data.model.TvShowRes
+import com.made.movieexpert.data.source.remote.model.MovieRes
+import com.made.movieexpert.data.source.remote.model.SeasonRes
+import com.made.movieexpert.data.source.remote.model.TvShowRes
 import com.made.movieexpert.data.source.remote.response.MovieResponse
 import com.made.movieexpert.data.source.remote.response.TvShowResponse
 import com.made.movieexpert.utils.EspressoIdlingResource

@@ -6,19 +6,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
-import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.databinding.ActivityDetailMovieBinding
+import com.made.movieexpert.domain.model.Movie
 import com.made.movieexpert.utils.Constants.BACKDROP_URL
 import com.made.movieexpert.utils.Constants.POSTER_URL
 import com.made.movieexpert.viewmodel.ViewModelFactory
-import com.made.movieexpert.vo.Status
+import kotlin.properties.Delegates
 
 class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     companion object {
@@ -26,8 +25,10 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     }
     private lateinit var binding: ActivityDetailMovieBinding
     private lateinit var viewModel: DetailMovieViewModel
+    private lateinit var detailMovie: Movie
     private var menu: Menu? = null
     private var movieId: Int = 0
+    private var statusFavorite by Delegates.notNull<Boolean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,33 +41,19 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
-        val extras = intent.extras
-        if (extras != null) {
-            movieId = extras.getInt(EXTRA_MOVIE)
-            viewModel.setSelectedMovie(movieId)
-            viewModel.getMovie.observe(this, { movie ->
-                if (movie != null) {
-                    when (movie.status) {
-                        Status.LOADING -> Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
-                        Status.SUCCESS -> if (movie.data != null) {
-                            populateMovie(movie.data)
-                        }
-                        Status.ERROR -> Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-        }
+        detailMovie = intent.getParcelableExtra(EXTRA_MOVIE)!!
+        populateMovie(detailMovie)
     }
 
-    private fun populateMovie(movie: MovieEntity) {
-        binding.tvName.text = movie.name
-        binding.tvDesc.text = movie.desc
-        binding.tvDate.text = movie.date
-        binding.tvRating.text = StringBuilder("${movie.rating}/10")
-        binding.tvPopularity.text = movie.popularity.toString()
+    private fun populateMovie(movie: Movie?) {
+        binding.tvName.text = movie?.name
+        binding.tvDesc.text = movie?.desc
+        binding.tvDate.text = movie?.date
+        binding.tvRating.text = StringBuilder("${movie?.rating}/10")
+        binding.tvPopularity.text = movie?.popularity.toString()
 
         Glide.with(this)
-            .load(POSTER_URL + movie.poster)
+            .load(POSTER_URL + movie?.poster)
             .transform(RoundedCorners(20))
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
@@ -74,12 +61,13 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
             .into(binding.imgPoster)
 
         Glide.with(this)
-            .load(BACKDROP_URL + movie.backdrop)
+            .load(BACKDROP_URL + movie?.backdrop)
             .transform(RoundedCorners(20))
             .apply(
                  RequestOptions.placeholderOf(R.drawable.ic_loading)
                      .error(R.drawable.ic_error))
             .into(binding.imgBackdrop)
+
     }
 
     override fun onClick(v: View) {
@@ -97,25 +85,16 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_detail, menu)
         this.menu = menu
-        viewModel.getMovie.observe(this, { movie ->
-            if (movie != null) {
-                when (movie.status) {
-                    Status.LOADING -> Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
-                    Status.SUCCESS -> if (movie.data != null) {
-                        populateMovie(movie.data)
-                        val state = movie.data.favorited
-                        setFavoriteState(state)
-                    }
-                    Status.ERROR -> Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
+        statusFavorite = detailMovie.isFavorite
+        setFavoriteState(statusFavorite)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_favorite) {
-            viewModel.setFavorite()
+            statusFavorite = !statusFavorite
+            viewModel.setFavorite(detailMovie, statusFavorite)
+            setFavoriteState(statusFavorite)
             return true
         }
         return super.onOptionsItemSelected(item)

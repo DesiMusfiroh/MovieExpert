@@ -1,7 +1,7 @@
 package com.made.movieexpert.api
 
-import com.made.movieexpert.data.model.MovieRes
-import com.made.movieexpert.data.model.TvShowRes
+import com.made.movieexpert.data.source.remote.model.MovieRes
+import com.made.movieexpert.data.source.remote.model.TvShowRes
 import com.made.movieexpert.data.source.remote.response.MovieResponse
 import com.made.movieexpert.data.source.remote.response.TvShowResponse
 import com.made.movieexpert.utils.Constants.API_KEY

@@ -1,16 +1,15 @@
-package com.made.movieexpert.data.model
+package com.made.movieexpert.data.source.remote.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MovieRes(
-
+data class TvShowRes(
     @field:SerializedName("id")
     val id: Int,
 
-    @field:SerializedName("title")
+    @field:SerializedName("original_name")
     val name: String,
 
     @field:SerializedName("overview")
@@ -22,12 +21,15 @@ data class MovieRes(
     @field:SerializedName("backdrop_path")
     val backdrop: String,
 
-    @field:SerializedName("release_date")
+    @field:SerializedName("first_air_date")
     val date: String,
 
     @field:SerializedName("popularity")
     val popularity: Double,
 
     @field:SerializedName("vote_average")
-    val rating: Double
+    val rating: Double,
+
+    @field:SerializedName("seasons")
+    val season: List<SeasonRes>?
 ) : Parcelable

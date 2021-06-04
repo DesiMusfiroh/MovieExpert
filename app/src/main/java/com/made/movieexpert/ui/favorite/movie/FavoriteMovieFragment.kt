@@ -1,5 +1,6 @@
 package com.made.movieexpert.ui.favorite.movie
 
+import FavoriteMovieAdapter
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -36,7 +37,7 @@ class FavoriteMovieFragment : Fragment() {
             viewModel.getFavoriteMovies().observe(viewLifecycleOwner, {
                 Log.d("favorite", "fragment $it")
                 fragmentMovieBinding.progressBar.visibility = View.GONE
-                adapter.submitList(it)
+                adapter.setMovies(it)
                 adapter.notifyDataSetChanged()
             })
         }

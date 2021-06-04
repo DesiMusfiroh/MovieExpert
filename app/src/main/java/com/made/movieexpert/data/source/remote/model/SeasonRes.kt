@@ -1,4 +1,4 @@
-package com.made.movieexpert.data.model
+package com.made.movieexpert.data.source.remote.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

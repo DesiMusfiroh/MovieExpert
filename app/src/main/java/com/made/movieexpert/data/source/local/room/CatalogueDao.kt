@@ -1,7 +1,6 @@
 package com.made.movieexpert.data.source.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.room.*
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
@@ -9,14 +8,14 @@ import com.made.movieexpert.data.source.local.entity.TvShowEntity
 @Dao
 interface CatalogueDao {
 
-    @Query("SELECT * FROM movieentities")
-    fun getMovies():  DataSource.Factory<Int, MovieEntity>
+    @Query("SELECT * FROM movies")
+    fun getMovies(): LiveData<List<MovieEntity>>
 
-    @Query("SELECT * FROM movieentities WHERE movieId = :movieId")
+    @Query("SELECT * FROM movies WHERE movieId = :movieId")
     fun getMovie(movieId: Int): LiveData<MovieEntity>
 
-    @Query("SELECT * FROM movieentities where favorited = 1")
-    fun getFavoriteMovies():  DataSource.Factory<Int, MovieEntity>
+    @Query("SELECT * FROM movies where favorited = 1")
+    fun getFavoriteMovies():  LiveData<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movies: List<MovieEntity>)
@@ -25,14 +24,14 @@ interface CatalogueDao {
     fun updateMovie(movie: MovieEntity)
 
 
-    @Query("SELECT * FROM tvshowentities")
-    fun getTvShows(): DataSource.Factory<Int, TvShowEntity>
+    @Query("SELECT * FROM tv_shows")
+    fun getTvShows(): LiveData<List<TvShowEntity>>
 
-    @Query("SELECT * FROM tvshowentities WHERE tvShowId = :tvShowId")
+    @Query("SELECT * FROM tv_shows WHERE tvShowId = :tvShowId")
     fun getTvShow(tvShowId: Int): LiveData<TvShowEntity>
 
-    @Query("SELECT * FROM tvshowentities where favorited = 1")
-    fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity>
+    @Query("SELECT * FROM tv_shows where favorited = 1")
+    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTvShows(movies: List<TvShowEntity>)
