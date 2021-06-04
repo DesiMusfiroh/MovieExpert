@@ -1,21 +1,19 @@
 package com.made.movieexpert.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.made.movieexpert.data.source.remote.model.SeasonRes
+import com.made.movieexpert.data.source.Resource
 import com.made.movieexpert.domain.model.Movie
 import com.made.movieexpert.domain.model.TvShow
-import com.made.movieexpert.vo.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface ICatalogueRepository {
-    fun getMovies(page: Int): LiveData<Resource<List<Movie>>>
-    fun getMovie(id: Int): LiveData<Resource<Movie>>
-    fun getFavoriteMovies(): LiveData<List<Movie>>
+    fun getMovies(page: Int): Flow<Resource<List<Movie>>>
+    fun getMovie(id: Int): Flow<Resource<Movie>>
+    fun getFavoriteMovies(): Flow<List<Movie>>
     fun setMovieFavorite(movie: Movie, state: Boolean)
 
-    fun getTvShows(page: Int): LiveData<Resource<List<TvShow>>>
-    fun getTvShow(id: Int): LiveData<Resource<TvShow>>
-    fun getFavoriteTvShows(): LiveData<List<TvShow>>
+    fun getTvShows(page: Int): Flow<Resource<List<TvShow>>>
+    fun getTvShow(id: Int): Flow<Resource<TvShow>>
+    fun getFavoriteTvShows(): Flow<List<TvShow>>
     fun setTvShowFavorite(tvShow: TvShow, state: Boolean)
 
-    fun getSeasonsByTvShow(tvShowId: Int): LiveData<List<SeasonRes>>
 }

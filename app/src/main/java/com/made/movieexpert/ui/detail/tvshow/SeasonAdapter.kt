@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
-import com.made.movieexpert.data.source.remote.model.SeasonRes
+import com.made.movieexpert.data.source.remote.response.SeasonResponse
 import com.made.movieexpert.databinding.ItemsSeasonBinding
 import com.made.movieexpert.utils.Constants
 
 class SeasonAdapter : RecyclerView.Adapter<SeasonAdapter.SeasonViewHolder>() {
 
-    private val listSeasons = ArrayList<SeasonRes>()
+    private val listSeasons = ArrayList<SeasonResponse>()
 
-    fun setSeasons(seasons: List<SeasonRes>?) {
+    fun setSeasons(seasons: List<SeasonResponse>?) {
         if (seasons == null) return
         this.listSeasons.clear()
         this.listSeasons.addAll(seasons)
@@ -34,7 +34,7 @@ class SeasonAdapter : RecyclerView.Adapter<SeasonAdapter.SeasonViewHolder>() {
     override fun getItemCount(): Int = listSeasons.size
 
     inner class SeasonViewHolder(private val binding: ItemsSeasonBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(season: SeasonRes) {
+        fun bind(season: SeasonResponse) {
             with(binding) {
                 tvItemNumber.text = StringBuilder("Season ${season.number}")
                 Glide.with(itemView.context)

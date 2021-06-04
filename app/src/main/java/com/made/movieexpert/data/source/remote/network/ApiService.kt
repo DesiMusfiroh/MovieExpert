@@ -1,33 +1,32 @@
-package com.made.movieexpert.api
+package com.made.movieexpert.data.source.remote.network
 
-import com.made.movieexpert.data.source.remote.model.MovieRes
-import com.made.movieexpert.data.source.remote.model.TvShowRes
 import com.made.movieexpert.data.source.remote.response.MovieResponse
 import com.made.movieexpert.data.source.remote.response.TvShowResponse
+import com.made.movieexpert.data.source.remote.response.ListMovieResponse
+import com.made.movieexpert.data.source.remote.response.ListTvShowResponse
 import com.made.movieexpert.utils.Constants.API_KEY
-import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
 
     @GET("movie/popular?api_key=$API_KEY")
-    fun getMovies(
+    suspend fun getMovies(
         @Query("page") page: Int
-    ) : Call<MovieResponse>
+    ) : ListMovieResponse
 
     @GET("tv/popular?api_key=$API_KEY")
-    fun getTvShows(
+    suspend fun getTvShows(
         @Query("page") page: Int
-    ) : Call<TvShowResponse>
+    ) : ListTvShowResponse
 
     @GET("movie/{id}?api_key=$API_KEY")
-    fun getMovie(
+    suspend fun getMovie(
         @Path("id") id: Int
-    ) : Call<MovieRes>
+    ) : MovieResponse
 
     @GET("tv/{id}?api_key=$API_KEY")
-    fun getTvShow(
+    suspend fun getTvShow(
         @Path("id") id: Int
-    ) : Call<TvShowRes>
+    ) : TvShowResponse
 
 }

@@ -3,7 +3,7 @@ package com.made.movieexpert.data.source
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
-import com.made.movieexpert.data.source.remote.model.SeasonRes
+import com.made.movieexpert.data.source.remote.response.SeasonResponse
 import com.made.movieexpert.data.source.local.LocalDataSource
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
@@ -12,7 +12,6 @@ import com.made.movieexpert.utils.AppExecutors
 import com.made.movieexpert.utils.DataDummy
 import com.made.movieexpert.utils.LiveDataTestUtil
 import com.made.movieexpert.utils.PagedListUtil
-import com.made.movieexpert.vo.Resource
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -138,7 +137,7 @@ class CatalogueRepositoryTest {
 
     @Test
     fun getSeasonsByTvShow() {
-        val season = MutableLiveData<List<SeasonRes>>()
+        val season = MutableLiveData<List<SeasonResponse>>()
         season.value = seasonResponses
 
         `when`(remote.getSeasonsByTvShow(tvShowId)).thenReturn(season)

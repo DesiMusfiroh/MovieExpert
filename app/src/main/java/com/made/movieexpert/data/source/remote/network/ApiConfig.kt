@@ -1,4 +1,4 @@
-package com.made.movieexpert.api
+package com.made.movieexpert.data.source.remote.network
 
 import com.made.movieexpert.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient

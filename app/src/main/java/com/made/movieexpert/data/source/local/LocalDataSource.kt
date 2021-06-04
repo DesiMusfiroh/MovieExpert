@@ -1,9 +1,9 @@
 package com.made.movieexpert.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
 import com.made.movieexpert.data.source.local.room.CatalogueDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDao) {
 
@@ -14,26 +14,27 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
             INSTANCE ?: LocalDataSource(catalogueDao)
     }
 
-    fun getMovies(): LiveData<List<MovieEntity>> = mCatalogueDao.getMovies()
+    fun getMovies(): Flow<List<MovieEntity>> = mCatalogueDao.getMovies()
 
-    fun getMovie(movieId: Int): LiveData<MovieEntity> = mCatalogueDao.getMovie(movieId)
+    fun getMovie(movieId: Int): Flow<MovieEntity> = mCatalogueDao.getMovie(movieId)
 
-    fun getFavoriteMovies(): LiveData<List<MovieEntity>> = mCatalogueDao.getFavoriteMovies()
+    fun getFavoriteMovies(): Flow<List<MovieEntity>> = mCatalogueDao.getFavoriteMovies()
 
-    fun insertMovies(movies: List<MovieEntity>) = mCatalogueDao.insertMovies(movies)
+    suspend fun insertMovies(movies: List<MovieEntity>) = mCatalogueDao.insertMovies(movies)
 
     fun setMovieFavorite(movie: MovieEntity, newState: Boolean) {
         movie.favorited = newState
         mCatalogueDao.updateMovie(movie)
     }
 
-    fun getTvShows(): LiveData<List<TvShowEntity>>  = mCatalogueDao.getTvShows()
 
-    fun getTvShow(tvShowId: Int): LiveData<TvShowEntity> = mCatalogueDao.getTvShow(tvShowId)
+    fun getTvShows(): Flow<List<TvShowEntity>> = mCatalogueDao.getTvShows()
 
-    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>> = mCatalogueDao.getFavoriteTvShows()
+    fun getTvShow(tvShowId: Int): Flow<TvShowEntity> = mCatalogueDao.getTvShow(tvShowId)
 
-    fun insertTvShows(tvShows: List<TvShowEntity>) = mCatalogueDao.insertTvShows(tvShows)
+    fun getFavoriteTvShows(): Flow<List<TvShowEntity>> = mCatalogueDao.getFavoriteTvShows()
+
+    suspend fun insertTvShows(tvShows: List<TvShowEntity>) = mCatalogueDao.insertTvShows(tvShows)
 
     fun setTvShowFavorite(tvShow: TvShowEntity, newState: Boolean) {
         tvShow.favorited = newState

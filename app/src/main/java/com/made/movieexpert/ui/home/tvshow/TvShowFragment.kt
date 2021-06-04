@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.made.movieexpert.data.source.Resource
 import com.made.movieexpert.databinding.FragmentTvShowBinding
 import com.made.movieexpert.viewmodel.ViewModelFactory
-import com.made.movieexpert.vo.Status
 
 class TvShowFragment : Fragment() {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
@@ -29,16 +29,16 @@ class TvShowFragment : Fragment() {
             val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
             fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
-            viewModel.getTvShows().observe(viewLifecycleOwner, {tvShows ->
+            viewModel.tvShows.observe(viewLifecycleOwner, { tvShows ->
                 if (tvShows != null) {
-                    when (tvShows.status) {
-                        Status.LOADING -> fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
-                        Status.SUCCESS -> {
+                    when (tvShows) {
+                        is Resource.Loading -> fragmentTvShowBinding.progressBar.visibility =
+                            View.VISIBLE
+                        is Resource.Success -> {
                             fragmentTvShowBinding.progressBar.visibility = View.GONE
                             tvShowAdapter.setTvShows(tvShows.data)
-                            tvShowAdapter.notifyDataSetChanged()
                         }
-                        Status.ERROR -> {
+                        is Resource.Error -> {
                             fragmentTvShowBinding.progressBar.visibility = View.GONE
                             Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.made.movieexpert.data.source.Resource
 import com.made.movieexpert.databinding.FragmentMovieBinding
 import com.made.movieexpert.viewmodel.ViewModelFactory
-import com.made.movieexpert.vo.Status
 
 class MovieFragment : Fragment() {
     private lateinit var fragmentMovieBinding: FragmentMovieBinding
@@ -29,22 +29,23 @@ class MovieFragment : Fragment() {
 
             val movieAdapter = MovieAdapter()
             fragmentMovieBinding.progressBar.visibility = View.VISIBLE
-            viewModel.getMovies().observe(viewLifecycleOwner, {movies ->
+            viewModel.movies.observe(viewLifecycleOwner, { movies ->
                 if (movies != null) {
-                    when (movies.status) {
-                        Status.LOADING -> fragmentMovieBinding.progressBar.visibility = View.VISIBLE
-                        Status.SUCCESS -> {
+                    when (movies) {
+                        is Resource.Loading -> fragmentMovieBinding.progressBar.visibility =
+                            View.VISIBLE
+                        is Resource.Success -> {
                             fragmentMovieBinding.progressBar.visibility = View.GONE
                             movieAdapter.setMovies(movies.data)
-                            movieAdapter.notifyDataSetChanged()
                         }
-                        Status.ERROR -> {
+                        is Resource.Error -> {
                             fragmentMovieBinding.progressBar.visibility = View.GONE
                             Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             })
+
 
             with(fragmentMovieBinding.rvMovie) {
                 layoutManager = GridLayoutManager(context, 3)

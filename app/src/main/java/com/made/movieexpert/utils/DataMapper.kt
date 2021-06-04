@@ -2,13 +2,13 @@ package com.made.movieexpert.utils
 
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
-import com.made.movieexpert.data.source.remote.model.MovieRes
-import com.made.movieexpert.data.source.remote.model.TvShowRes
+import com.made.movieexpert.data.source.remote.response.MovieResponse
+import com.made.movieexpert.data.source.remote.response.TvShowResponse
 import com.made.movieexpert.domain.model.Movie
 import com.made.movieexpert.domain.model.TvShow
 
 object DataMapper {
-    fun mapMovieResponsesToEntities(input: List<MovieRes>): List<MovieEntity> {
+    fun mapMovieResponsesToEntities(input: List<MovieResponse>): List<MovieEntity> {
         val movieList = ArrayList<MovieEntity>()
         input.map {
             val movie = MovieEntity(
@@ -53,7 +53,7 @@ object DataMapper {
     )
 
 
-    fun mapTvShowResponsesToEntities(input: List<TvShowRes>): List<TvShowEntity> {
+    fun mapTvShowResponsesToEntities(input: List<TvShowResponse>): List<TvShowEntity> {
         val tvShowList = ArrayList<TvShowEntity>()
         input.map {
             val tvShow = TvShowEntity(

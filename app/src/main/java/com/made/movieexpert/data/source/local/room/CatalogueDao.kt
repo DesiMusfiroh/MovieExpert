@@ -1,40 +1,40 @@
 package com.made.movieexpert.data.source.local.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CatalogueDao {
 
     @Query("SELECT * FROM movies")
-    fun getMovies(): LiveData<List<MovieEntity>>
+    fun getMovies(): Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM movies WHERE movieId = :movieId")
-    fun getMovie(movieId: Int): LiveData<MovieEntity>
+    fun getMovie(movieId: Int): Flow<MovieEntity>
 
     @Query("SELECT * FROM movies where favorited = 1")
-    fun getFavoriteMovies():  LiveData<List<MovieEntity>>
+    fun getFavoriteMovies():  Flow<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies: List<MovieEntity>)
+    suspend fun insertMovies(movies: List<MovieEntity>)
 
     @Update
     fun updateMovie(movie: MovieEntity)
 
 
     @Query("SELECT * FROM tv_shows")
-    fun getTvShows(): LiveData<List<TvShowEntity>>
+    fun getTvShows(): Flow<List<TvShowEntity>>
 
     @Query("SELECT * FROM tv_shows WHERE tvShowId = :tvShowId")
-    fun getTvShow(tvShowId: Int): LiveData<TvShowEntity>
+    fun getTvShow(tvShowId: Int): Flow<TvShowEntity>
 
     @Query("SELECT * FROM tv_shows where favorited = 1")
-    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>>
+    fun getFavoriteTvShows(): Flow<List<TvShowEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTvShows(movies: List<TvShowEntity>)
+    suspend fun insertTvShows(movies: List<TvShowEntity>)
 
     @Update
     fun updateTvShow(movie: TvShowEntity)

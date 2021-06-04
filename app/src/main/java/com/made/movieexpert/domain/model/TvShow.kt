@@ -1,7 +1,6 @@
 package com.made.movieexpert.domain.model
 
 import android.os.Parcelable
-import com.made.movieexpert.data.source.remote.model.SeasonRes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

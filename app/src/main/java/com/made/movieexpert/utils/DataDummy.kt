@@ -1,6 +1,6 @@
 package com.made.movieexpert.utils
 
-import com.made.movieexpert.data.source.remote.model.SeasonRes
+import com.made.movieexpert.data.source.remote.response.SeasonResponse
 import com.made.movieexpert.data.source.local.entity.MovieEntity
 import com.made.movieexpert.data.source.local.entity.TvShowEntity
 
@@ -381,9 +381,10 @@ object DataDummy {
         )
     }
 
-    fun generateDummySeasons(): List<SeasonRes> {
-        val seasons = ArrayList<SeasonRes>()
-        seasons.add(SeasonRes(
+    fun generateDummySeasons(): List<SeasonResponse> {
+        val seasons = ArrayList<SeasonResponse>()
+        seasons.add(
+            SeasonResponse(
                 id = 3627,
                 number = 1,
                 name = "Season 1",
@@ -391,8 +392,10 @@ object DataDummy {
                 desc = "Trouble is brewing in the Seven Kingdoms of Westeros. For the driven inhabitants of this visionary world, control of Westeros' Iron Throne holds the lure of great power. But in a land where the seasons can last a lifetime, winter is coming...and beyond the Great Wall that protects them, an ancient evil has returned. In Season One, the story centers on three primary areas: the Stark and the Lannister families, whose designs on controlling the throne threaten a tenuous peace; the dragon princess Daenerys, heir to the former dynasty, who waits just over the Narrow Sea with her malevolent brother Viserys; and the Great Wall--a massive barrier of ice where a forgotten danger is stirring.",
                 poster = "/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg",
                 episode = 10
-        ))
-        seasons.add(SeasonRes(
+        )
+        )
+        seasons.add(
+            SeasonResponse(
                 id = 3627,
                 number = 2,
                 name = "Season 2",
@@ -400,7 +403,8 @@ object DataDummy {
                 desc = "The cold winds of winter are rising in Westeros...war is coming...and five kings continue their savage quest for control of the all-powerful Iron Throne. With winter fast approaching, the coveted Iron Throne is occupied by the cruel Joffrey, counseled by his conniving mother Cersei and uncle Tyrion. But the Lannister hold on the Throne is under assault on many fronts. Meanwhile, a new leader is rising among the wildings outside the Great Wall, adding new perils for Jon Snow and the order of the Night's Watch.",
                 poster = "/5tuhCkqPOT20XPwwi9NhFnC1g9R.jpg",
                 episode = 10
-        ))
+        )
+        )
         return seasons
     }
 

@@ -34,7 +34,7 @@ class FavoriteMovieFragment : Fragment() {
             }
 
             fragmentMovieBinding.progressBar.visibility = View.VISIBLE
-            viewModel.getFavoriteMovies().observe(viewLifecycleOwner, {
+            viewModel.favoriteMovies.observe(viewLifecycleOwner, {
                 Log.d("favorite", "fragment $it")
                 fragmentMovieBinding.progressBar.visibility = View.GONE
                 adapter.setMovies(it)
