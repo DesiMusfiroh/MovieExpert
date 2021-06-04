@@ -13,5 +13,4 @@ class DetailTvShowViewModel(private val catalogueUseCase: CatalogueUseCase) : Vi
     }
 
     fun setFavorite(tvShow: TvShow, newStatus:Boolean) = catalogueUseCase.setTvShowFavorite(tvShow, newStatus)
-
 }

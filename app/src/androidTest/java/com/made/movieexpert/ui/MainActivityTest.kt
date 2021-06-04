@@ -80,8 +80,6 @@ class MainActivityTest {
         onView(withId(R.id.tv_date)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_rating)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_popularity)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_season)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_season)).perform(ViewActions.scrollTo())
         onView(withId(R.id.action_favorite)).perform(ViewActions.click())
         Espresso.pressBack()
     }

@@ -10,6 +10,7 @@ import com.made.movieexpert.core.databinding.ItemsCatalogueFavoriteBinding
 import com.made.movieexpert.core.domain.model.Movie
 import com.made.movieexpert.core.utils.Constants
 
+@Suppress("DEPRECATION")
 class FavoriteMovieAdapter : RecyclerView.Adapter<FavoriteMovieAdapter.MovieViewHolder>() {
     private var listMovies = ArrayList<Movie>()
     private lateinit var onItemClickCallback: OnItemClickCallback

@@ -10,6 +10,7 @@ import com.made.movieexpert.core.databinding.ItemsCatalogueFavoriteBinding
 import com.made.movieexpert.core.domain.model.TvShow
 import com.made.movieexpert.core.utils.Constants
 
+@Suppress("DEPRECATION")
 class FavoriteTvShowAdapter : RecyclerView.Adapter<FavoriteTvShowAdapter.TvShowViewHolder>() {
     private var listTvShows = ArrayList<TvShow>()
     private lateinit var onItemClickCallback: OnItemClickCallback

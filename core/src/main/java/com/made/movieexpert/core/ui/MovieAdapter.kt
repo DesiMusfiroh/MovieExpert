@@ -10,6 +10,7 @@ import com.made.movieexpert.core.databinding.ItemsCatalogueBinding
 import com.made.movieexpert.core.domain.model.Movie
 import com.made.movieexpert.core.utils.Constants.POSTER_URL
 
+@Suppress("DEPRECATION")
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private var listMovies = ArrayList<Movie>()
     private lateinit var onItemClickCallback: OnItemClickCallback

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.made.movieexpert.favorite
 
 import androidx.annotation.StringRes
