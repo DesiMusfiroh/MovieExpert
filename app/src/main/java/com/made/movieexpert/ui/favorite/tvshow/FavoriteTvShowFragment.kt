@@ -5,13 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.made.movieexpert.databinding.FragmentTvShowBinding
-import com.made.movieexpert.viewmodel.ViewModelFactory
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FavoriteTvShowFragment : Fragment() {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
+    private val viewModel: FavoriteTvShowViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
@@ -21,10 +21,7 @@ class FavoriteTvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this, factory)[FavoriteTvShowViewModel::class.java]
             val adapter = FavoriteTvShowAdapter()
-
             fragmentTvShowBinding.apply {
                 rvTvshow.layoutManager = LinearLayoutManager(context)
                 rvTvshow.setHasFixedSize(false)

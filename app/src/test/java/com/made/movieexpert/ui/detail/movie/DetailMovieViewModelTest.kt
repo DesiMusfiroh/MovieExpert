@@ -4,9 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.made.movieexpert.vo.Resource
-import com.made.movieexpert.data.source.CatalogueRepository
-import com.made.movieexpert.data.source.local.entity.MovieEntity
-import com.made.movieexpert.utils.DataDummy
+import com.made.movieexpert.core.data.source.CatalogueRepository
+import com.made.movieexpert.core.data.source.local.entity.MovieEntity
+import com.made.movieexpert.core.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.Test
 import org.junit.Before

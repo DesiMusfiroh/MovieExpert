@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.made.movieexpert.data.source.Resource
+import com.made.movieexpert.core.data.source.Resource
 import com.made.movieexpert.databinding.FragmentTvShowBinding
-import com.made.movieexpert.viewmodel.ViewModelFactory
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvShowFragment : Fragment() {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
     private val tvShowAdapter = TvShowAdapter()
+    private val viewModel: TvShowViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
@@ -24,9 +24,6 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
             fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
             viewModel.tvShows.observe(viewLifecycleOwner, { tvShows ->

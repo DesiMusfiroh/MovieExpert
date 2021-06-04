@@ -11,7 +11,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.made.movieexpert.R
-import com.made.movieexpert.utils.EspressoIdlingResource
+import com.made.movieexpert.core.utils.EspressoIdlingResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

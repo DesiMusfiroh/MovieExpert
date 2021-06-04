@@ -6,9 +6,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ItemsCatalogueFavoriteBinding
-import com.made.movieexpert.domain.model.Movie
+import com.made.movieexpert.core.domain.model.Movie
 import com.made.movieexpert.ui.detail.movie.DetailMovieActivity
-import com.made.movieexpert.utils.Constants
+import com.made.movieexpert.core.utils.Constants
 
 class FavoriteMovieAdapter : RecyclerView.Adapter<FavoriteMovieAdapter.MovieViewHolder>() {
     private var listMovies = ArrayList<Movie>()

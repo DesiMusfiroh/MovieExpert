@@ -3,18 +3,21 @@ package com.made.movieexpert.data.source
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.made.movieexpert.data.source.remote.network.ApiResponse
-import com.made.movieexpert.data.source.remote.response.SeasonResponse
-import com.made.movieexpert.data.source.local.LocalDataSource
-import com.made.movieexpert.data.source.remote.RemoteDataSource
-import com.made.movieexpert.data.source.remote.response.MovieResponse
-import com.made.movieexpert.data.source.remote.response.TvShowResponse
-import com.made.movieexpert.utils.AppExecutors
+import com.made.movieexpert.core.data.source.CatalogueDataSource
+import com.made.movieexpert.core.data.source.NetworkBoundResource
+import com.made.movieexpert.core.data.source.Resource
+import com.made.movieexpert.core.data.source.remote.network.ApiResponse
+import com.made.movieexpert.core.data.source.remote.response.SeasonResponse
+import com.made.movieexpert.core.data.source.local.LocalDataSource
+import com.made.movieexpert.core.data.source.remote.RemoteDataSource
+import com.made.movieexpert.core.data.source.remote.response.MovieResponse
+import com.made.movieexpert.core.data.source.remote.response.TvShowResponse
+import com.made.movieexpert.core.utils.AppExecutors
 
 class FakeCatalogueRepository constructor(
-        private val remoteDataSource: RemoteDataSource,
-        private val localDataSource: LocalDataSource,
-        private val appExecutors: AppExecutors
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors
 ) : CatalogueDataSource {
 
     override fun getMovies(page: Int): LiveData<Resource<PagedList<MovieEntity>>> {

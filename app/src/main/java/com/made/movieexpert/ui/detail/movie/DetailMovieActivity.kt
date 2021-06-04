@@ -7,16 +7,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ActivityDetailMovieBinding
-import com.made.movieexpert.domain.model.Movie
-import com.made.movieexpert.utils.Constants.BACKDROP_URL
-import com.made.movieexpert.utils.Constants.POSTER_URL
-import com.made.movieexpert.viewmodel.ViewModelFactory
+import com.made.movieexpert.core.domain.model.Movie
+import com.made.movieexpert.core.utils.Constants.BACKDROP_URL
+import com.made.movieexpert.core.utils.Constants.POSTER_URL
+import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
 class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
@@ -24,11 +23,11 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         const val EXTRA_MOVIE = "extra_movie"
     }
     private lateinit var binding: ActivityDetailMovieBinding
-    private lateinit var viewModel: DetailMovieViewModel
     private lateinit var detailMovie: Movie
     private var menu: Menu? = null
     private var movieId: Int = 0
     private var statusFavorite by Delegates.notNull<Boolean>()
+    private val viewModel: DetailMovieViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +36,6 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener{
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnShare.setOnClickListener(this)
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
         detailMovie = intent.getParcelableExtra(EXTRA_MOVIE)!!
         populateMovie(detailMovie)

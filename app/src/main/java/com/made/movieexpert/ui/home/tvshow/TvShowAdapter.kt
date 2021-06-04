@@ -8,9 +8,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ItemsCatalogueBinding
-import com.made.movieexpert.domain.model.TvShow
+import com.made.movieexpert.core.domain.model.TvShow
 import com.made.movieexpert.ui.detail.tvshow.DetailTvShowActivity
-import com.made.movieexpert.utils.Constants.POSTER_URL
+import com.made.movieexpert.core.utils.Constants.POSTER_URL
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     private var listTvShows = ArrayList<TvShow>()

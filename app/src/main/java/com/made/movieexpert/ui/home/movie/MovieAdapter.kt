@@ -8,9 +8,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ItemsCatalogueBinding
-import com.made.movieexpert.domain.model.Movie
+import com.made.movieexpert.core.domain.model.Movie
 import com.made.movieexpert.ui.detail.movie.DetailMovieActivity
-import com.made.movieexpert.utils.Constants.POSTER_URL
+import com.made.movieexpert.core.utils.Constants.POSTER_URL
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private var listMovies = ArrayList<Movie>()

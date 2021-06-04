@@ -7,16 +7,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ActivityDetailTvshowBinding
-import com.made.movieexpert.domain.model.TvShow
-import com.made.movieexpert.utils.Constants.BACKDROP_URL
-import com.made.movieexpert.utils.Constants.POSTER_URL
-import com.made.movieexpert.viewmodel.ViewModelFactory
+import com.made.movieexpert.core.domain.model.TvShow
+import com.made.movieexpert.core.utils.Constants.BACKDROP_URL
+import com.made.movieexpert.core.utils.Constants.POSTER_URL
+import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
 class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
@@ -25,12 +24,11 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private lateinit var binding: ActivityDetailTvshowBinding
-    private lateinit var viewModel: DetailTvShowViewModel
     private lateinit var detailTvShow: TvShow
-    private lateinit var seasonAdapter: SeasonAdapter
     private var menu: Menu? = null
     private var tvShowId: Int = 0
     private var statusFavorite by Delegates.notNull<Boolean>()
+    private val viewModel: DetailTvShowViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,24 +38,8 @@ class DetailTvShowActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.btnShare.setOnClickListener(this)
 
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[DetailTvShowViewModel::class.java]
-
         detailTvShow = intent.getParcelableExtra(EXTRA_TV_SHOW)!!
         populateTvShow(detailTvShow)
-
-//        seasonAdapter = SeasonAdapter()
-//        viewModel.getSeasons().observe(this, {
-//            binding.progressBar.visibility = View.GONE
-//            seasonAdapter.setSeasons(it)
-//        })
-//
-//        with(binding.rvSeason) {
-//            isNestedScrollingEnabled = false
-//            layoutManager = LinearLayoutManager(this@DetailTvShowActivity, LinearLayoutManager.HORIZONTAL, false)
-//            setHasFixedSize(true)
-//            adapter = seasonAdapter
-//        }
     }
 
     private fun populateTvShow(tvShow: TvShow) {

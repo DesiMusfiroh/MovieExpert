@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.made.movieexpert.data.source.CatalogueRepository
-import com.made.movieexpert.data.source.local.entity.TvShowEntity
+import com.made.movieexpert.core.data.source.CatalogueRepository
+import com.made.movieexpert.core.data.source.local.entity.TvShowEntity
 import com.made.movieexpert.vo.Resource
 import org.junit.Test
 import org.junit.Assert.*

@@ -8,9 +8,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ItemsCatalogueFavoriteBinding
-import com.made.movieexpert.domain.model.TvShow
+import com.made.movieexpert.core.domain.model.TvShow
 import com.made.movieexpert.ui.detail.tvshow.DetailTvShowActivity
-import com.made.movieexpert.utils.Constants
+import com.made.movieexpert.core.utils.Constants
 
 class FavoriteTvShowAdapter : RecyclerView.Adapter<FavoriteTvShowAdapter.TvShowViewHolder>() {
     private var listTvShows = ArrayList<TvShow>()
