@@ -3,7 +3,7 @@ package com.made.movieexpert.data.source
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.made.movieexpert.core.data.source.CatalogueDataSource
+import com.capstone.movieexpert.core.data.source.CatalogueDataSource
 import com.made.movieexpert.core.data.source.NetworkBoundResource
 import com.made.movieexpert.core.data.source.Resource
 import com.made.movieexpert.core.data.source.remote.network.ApiResponse
@@ -18,7 +18,7 @@ class FakeCatalogueRepository constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) : CatalogueDataSource {
+) : _root_ide_package_.com.capstone.movieexpert.core.data.source.CatalogueDataSource {
 
     override fun getMovies(page: Int): LiveData<Resource<PagedList<MovieEntity>>> {
         return object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Movie Expert</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie">Movies</string>
+    <string name="tvshow">Tv Shows</string>
+    <string name="desc">Description</string>
+    <string name="name">Name</string>
+    <string name="date">yyyy-mm-dd</string>
+    <string name="release_date">Release Date :</string>
+    <string name="popularity">Popularity</string>
+    <string name="rating">Rating</string>
+    <string name="dots">:  </string>
+    <string name="share">Share</string>
+    <string name="backdrop">Backdrop</string>
+    <string name="back">Back</string>
+    <string name="poster">Poster</string>
+    <string name="logo">Logo</string>
+    <string name="send">Send</string>
+    <string name="url_movie">https://www.themoviedb.org/movie/%1$d</string>
+    <string name="url_tv">https://www.themoviedb.org/tv/%1$d</string>
+    <string name="season">Season</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_search">Search</string>
+    <string name="menu_detail">Menu Detail</string>
+</resources>

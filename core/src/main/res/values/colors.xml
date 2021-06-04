@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="placeholder">#6FB6B6B6</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#98D7CF</color>
+    <color name="primaryDark">#127171</color>
+    <color name="accentLight">#F8F5F1</color>
+    <color name="accentDark">#4A3933</color>
+    <color name="yellow">#F6EE26</color>
+    <color name="blue">#6DA2D3</color>
+</resources>

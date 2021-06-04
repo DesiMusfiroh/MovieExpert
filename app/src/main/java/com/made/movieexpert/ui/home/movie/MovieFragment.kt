@@ -1,5 +1,6 @@
 package com.made.movieexpert.ui.home.movie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.made.movieexpert.core.data.source.Resource
+import com.capstone.movieexpert.core.data.source.Resource
+import com.capstone.movieexpert.core.domain.model.Movie
+import com.capstone.movieexpert.core.ui.MovieAdapter
 import com.made.movieexpert.databinding.FragmentMovieBinding
+import com.made.movieexpert.ui.detail.movie.DetailMovieActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment() {
@@ -25,6 +29,14 @@ class MovieFragment : Fragment() {
         if (activity != null) {
 
             val movieAdapter = MovieAdapter()
+            movieAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: Movie) {
+                    val intent =  Intent(context, DetailMovieActivity::class.java)
+                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, data)
+                    context?.startActivity(intent)
+                }
+            })
+
             fragmentMovieBinding.progressBar.visibility = View.VISIBLE
             viewModel.movies.observe(viewLifecycleOwner, { movies ->
                 if (movies != null) {
@@ -42,7 +54,6 @@ class MovieFragment : Fragment() {
                     }
                 }
             })
-
 
             with(fragmentMovieBinding.rvMovie) {
                 layoutManager = GridLayoutManager(context, 3)

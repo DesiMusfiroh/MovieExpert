@@ -10,11 +10,11 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.capstone.movieexpert.core.domain.model.Movie
+import com.capstone.movieexpert.core.utils.Constants.BACKDROP_URL
+import com.capstone.movieexpert.core.utils.Constants.POSTER_URL
 import com.made.movieexpert.R
 import com.made.movieexpert.databinding.ActivityDetailMovieBinding
-import com.made.movieexpert.core.domain.model.Movie
-import com.made.movieexpert.core.utils.Constants.BACKDROP_URL
-import com.made.movieexpert.core.utils.Constants.POSTER_URL
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 

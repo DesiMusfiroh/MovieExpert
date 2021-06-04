@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.capstone.movieexpert.core.data.source.remote.response.SeasonResponse
+import com.capstone.movieexpert.core.utils.Constants
 import com.made.movieexpert.R
-import com.made.movieexpert.core.data.source.remote.response.SeasonResponse
 import com.made.movieexpert.databinding.ItemsSeasonBinding
-import com.made.movieexpert.core.utils.Constants
 
 class SeasonAdapter : RecyclerView.Adapter<SeasonAdapter.SeasonViewHolder>() {
 
