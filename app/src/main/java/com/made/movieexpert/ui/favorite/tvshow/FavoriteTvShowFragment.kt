@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.movieexpert.core.domain.model.TvShow
-import com.capstone.movieexpert.core.ui.FavoriteTvShowAdapter
-import com.capstone.movieexpert.core.ui.TvShowAdapter
+import com.made.movieexpert.core.domain.model.TvShow
+import com.made.movieexpert.core.ui.FavoriteTvShowAdapter
 import com.made.movieexpert.databinding.FragmentTvShowBinding
 import com.made.movieexpert.ui.detail.tvshow.DetailTvShowActivity
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -1,7 +1,7 @@
 package com.made.movieexpert.di
 
-import com.capstone.movieexpert.core.domain.usecase.CatalogueInteractor
-import com.capstone.movieexpert.core.domain.usecase.CatalogueUseCase
+import com.made.movieexpert.core.domain.usecase.CatalogueInteractor
+import com.made.movieexpert.core.domain.usecase.CatalogueUseCase
 import com.made.movieexpert.ui.detail.movie.DetailMovieViewModel
 import com.made.movieexpert.ui.detail.tvshow.DetailTvShowViewModel
 import com.made.movieexpert.ui.favorite.movie.FavoriteMovieViewModel

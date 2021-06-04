@@ -212,32 +212,6 @@
                 android:text="@string/desc"
                 android:textSize="12sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/rocknroll_one"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="@string/season"/>
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_season"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:orientation="horizontal"
-                tools:listitem="@layout/items_season"/>
-
             <Button
                 android:id="@+id/btn_share"
                 android:layout_width="200dp"

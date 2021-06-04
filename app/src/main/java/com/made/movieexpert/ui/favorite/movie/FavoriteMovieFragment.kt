@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.movieexpert.core.domain.model.Movie
-import com.capstone.movieexpert.core.ui.FavoriteMovieAdapter
+import com.made.movieexpert.core.domain.model.Movie
+import com.made.movieexpert.core.ui.FavoriteMovieAdapter
 import com.made.movieexpert.databinding.FragmentMovieBinding
 import com.made.movieexpert.ui.detail.movie.DetailMovieActivity
 import org.koin.android.viewmodel.ext.android.viewModel

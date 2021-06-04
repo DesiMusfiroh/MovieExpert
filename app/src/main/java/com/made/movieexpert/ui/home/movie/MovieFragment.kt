@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.capstone.movieexpert.core.data.source.Resource
-import com.capstone.movieexpert.core.domain.model.Movie
-import com.capstone.movieexpert.core.ui.MovieAdapter
+import com.made.movieexpert.core.data.source.Resource
+import com.made.movieexpert.core.domain.model.Movie
+import com.made.movieexpert.core.ui.MovieAdapter
 import com.made.movieexpert.databinding.FragmentMovieBinding
 import com.made.movieexpert.ui.detail.movie.DetailMovieActivity
 import org.koin.android.viewmodel.ext.android.viewModel
