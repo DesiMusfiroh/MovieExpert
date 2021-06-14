@@ -1,2 +1,2 @@
 # MovieExpert
-[![DesiMusfiroh]https://app.circleci.com/pipelines/github/DesiMusfiroh/MovieExpert.svg?style=svg)](https://app.circleci.com/pipelines/github/DesiMusfiroh/MovieExpert)
+[![DesiMusfiroh](https://circleci.com/gh/DesiMusfiroh/MovieExpert.svg?style=svg)](https://circleci.com/gh/DesiMusfiroh/MovieExpert)
