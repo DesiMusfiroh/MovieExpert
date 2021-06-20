@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.made.movieexpert.ui.home
 
 import androidx.annotation.StringRes
@@ -8,7 +10,6 @@ import com.made.movieexpert.R
 import com.made.movieexpert.ui.home.movie.MovieFragment
 import com.made.movieexpert.ui.home.tvshow.TvShowFragment
 
-@Suppress("DEPRECATION")
 class SectionsPagerAdapter(private val mContext: HomeFragment, fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 

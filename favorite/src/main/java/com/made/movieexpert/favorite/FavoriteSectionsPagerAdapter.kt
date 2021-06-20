@@ -10,7 +10,6 @@ import com.made.movieexpert.R
 import com.made.movieexpert.favorite.movie.FavoriteMovieFragment
 import com.made.movieexpert.favorite.tvshow.FavoriteTvShowFragment
 
-@Suppress("DEPRECATION")
 class FavoriteSectionsPagerAdapter (private val mContext: FavoriteFragment, fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
