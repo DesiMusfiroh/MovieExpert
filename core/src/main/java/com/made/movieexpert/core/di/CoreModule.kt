@@ -1,4 +1,4 @@
-package com.made.movieexpert.di
+package com.made.movieexpert.core.di
 
 import androidx.room.Room
 import com.made.movieexpert.core.data.source.CatalogueRepository

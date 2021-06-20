@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.made.movieexpert.core.domain.usecase.CatalogueUseCase
 
-class FavoriteMovieViewModel(private val catalogueUseCase: CatalogueUseCase) : ViewModel() {
+class FavoriteMovieViewModel(catalogueUseCase: CatalogueUseCase) : ViewModel() {
     val favoriteMovies = catalogueUseCase.getFavoriteMovies().asLiveData()
 }

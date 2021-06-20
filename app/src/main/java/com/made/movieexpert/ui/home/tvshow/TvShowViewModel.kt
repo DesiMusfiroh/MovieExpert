@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.made.movieexpert.core.domain.usecase.CatalogueUseCase
 
-class TvShowViewModel(private val catalogueUseCase: CatalogueUseCase) : ViewModel() {
+class TvShowViewModel(catalogueUseCase: CatalogueUseCase) : ViewModel() {
     val tvShows = catalogueUseCase.getTvShows(1).asLiveData()
 }

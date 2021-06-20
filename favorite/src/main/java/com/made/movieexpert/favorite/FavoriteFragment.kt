@@ -12,7 +12,7 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var fragmentFavoriteBinding: FragmentFavoriteBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentFavoriteBinding = FragmentFavoriteBinding.inflate(layoutInflater, container, false)
         return fragmentFavoriteBinding.root
     }

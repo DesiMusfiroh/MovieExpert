@@ -87,7 +87,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:fontFamily="@font/rocknroll_one"
+                    android:fontFamily="@font/rock_and_roll_one"
                     android:text="@string/name"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -128,7 +128,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
-                            android:fontFamily="@font/rocknroll_one"
+                            android:fontFamily="@font/rock_and_roll_one"
                             android:text="@string/rating"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -152,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
-                            android:fontFamily="@font/rocknroll_one"
+                            android:fontFamily="@font/rock_and_roll_one"
                             android:text="@string/popularity"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -166,7 +166,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/rocknroll_one"
+                    android:fontFamily="@font/rock_and_roll_one"
                     android:text="@string/release_date"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -180,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rocknroll_one"
+                    android:fontFamily="@font/rock_and_roll_one"
                     android:text="@string/date"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -192,7 +192,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rocknroll_one"
+                android:fontFamily="@font/rock_and_roll_one"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -204,7 +204,7 @@
 
             <TextView
                 android:id="@+id/tv_desc"
-                android:fontFamily="@font/rocknroll_one"
+                android:fontFamily="@font/rock_and_roll_one"
                 android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
