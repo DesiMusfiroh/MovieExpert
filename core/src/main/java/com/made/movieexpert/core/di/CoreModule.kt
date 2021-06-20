@@ -9,6 +9,8 @@ import com.made.movieexpert.core.data.source.remote.network.ApiService
 import com.made.movieexpert.core.domain.repository.ICatalogueRepository
 import com.made.movieexpert.core.utils.AppExecutors
 import com.made.movieexpert.core.utils.Constants.BASE_URL
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -20,10 +22,14 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<CatalogueDatabase>().catalogueDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("made".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             CatalogueDatabase::class.java, "MovieExpert.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+                .openHelperFactory(factory)
+                .build()
     }
 }
 
